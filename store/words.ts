@@ -62,7 +62,6 @@ export const useWordsStore = defineStore('words', {
 
       useProgressTaskStore().submitTask(this.currentWord.word.id, isCorrect)
     },
-
     nextWord() {
       this.isAnswered = false
       this.isPinyi = false

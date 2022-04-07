@@ -20,7 +20,7 @@ const { $t } = useNuxtApp()
 
 const currentRoute = computed(() => useRouter().currentRoute.value)
 const routeName = computed(() => currentRoute.value.name)
-const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ''))
+const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ""))
 
 // import { useUserStore } from './store'
 
@@ -31,10 +31,10 @@ const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ''))
 
 useMeta({
   meta: [
-    { property: 'og:title', content: "$t('meta.title')" },
-    { property: 'og:description', content: "$t('about.content')" },
-    { property: 'og:image', content: '/banner.jpg' },
-    { property: 'og:type', content: 'profile' },
+    { property: "og:title", content: "$t('meta.title')" },
+    { property: "og:description", content: "$t('about.content')" },
+    { property: "og:image", content: "/banner.jpg" },
+    { property: "og:type", content: "profile" },
   ],
 })
 </script>

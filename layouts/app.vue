@@ -15,7 +15,9 @@
   z-index: 10;
 
   padding-top: var(--header-height);
-  min-height: calc(100vh - var(--footer-height));
+
+  // min-height: calc(100vh - var(--footer-height));
+  min-height: 100vh;
   height: 100%;
 }
 </style>

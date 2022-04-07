@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="hieroglyph">
-    <div>YEP</div>
+    <div>MY</div>
   </NuxtLayout>
 </template>
 
