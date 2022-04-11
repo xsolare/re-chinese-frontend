@@ -11,7 +11,7 @@
 <style lang="scss">
 .footer {
   width: 100%;
-  min-height: 10px;
+  min-height: 15px;
   max-height: 15px;
   fill: var(--color-header-content-bg);
   transform: rotate(180deg);

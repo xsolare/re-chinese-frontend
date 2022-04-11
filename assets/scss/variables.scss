@@ -1,5 +1,5 @@
-@import './media.scss';
-@import './placeholder.scss';
+@import "./media.scss";
+@import "./placeholder.scss";
 
 $font-size-small: 14px !default;
 $font-size-base: 16px !default;
@@ -31,6 +31,7 @@ $ripple-easing: cubic-bezier(0, 0.5, 0.5, 1.2);
 //? Background
 $color-background-content: #e4e4e4;
 $color-background-modal: #333;
+$color-button-bg: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
 
 //* Dark theme
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +39,7 @@ $color-background-modal: #333;
 //? Background
 $color-background-content-dark: #161718;
 $color-background-modal-dark: rgb(22, 22, 22);
+$color-button-bg-dark: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
 
 //* Blue theme
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +47,7 @@ $color-background-modal-dark: rgb(22, 22, 22);
 //? Background
 $color-background-content-blue: #161b22;
 $color-background-modal-blue: #1b222c;
+$color-button-bg-blue: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
 
 %ellipsis {
   overflow: hidden;

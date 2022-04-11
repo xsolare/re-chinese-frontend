@@ -32,16 +32,8 @@
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
   --color-toast-bg: rgba(255, 255, 255, 0.6);
-  --color-button-bg: #6db6ff;
+  --color-button-bg: #{$color-button-bg};
   --color-button-bg-hover: darken(rgba(255, 255, 255, 0.6), 15%);
-  --ripple-background: radial-gradient(
-    circle at center,
-    #0a60ffca 40%,
-    #2869b3c9 60%,
-    #3b5ac0c9 71%,
-    #2678d6d8 84%,
-    #0486ffcb 100%
-  );
 
   // Answer
   --color-yes-bg: #4aff90;
@@ -80,19 +72,8 @@
   --color-border: #4747478f;
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
-  --color-button-bg: #3298ff;
+  --color-button-bg: #{$color-button-bg-dark};
   --color-button-bg-hover: darken(#3298ff, 15%);
-  --ripple-background: radial-gradient(
-    circle at center,
-    darken(--color-background-content, 10%) 0%,
-    darken(--color-background-content, 5%) 15%,
-    darken(--color-background-content, 0%) 25%,
-    #dd0012d2 40%,
-    #bb1818c9 60%,
-    #6e0000c7 71%,
-    #ca001bd5 84%,
-    #e00000d0 100%
-  );
 
   // Etc
   // --color-highlight: rgb(255, 71, 71);
@@ -136,19 +117,8 @@
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
   --color-toast-bg: rgba(0, 0, 0, 0.6);
-  --color-button-bg: #6db6ff;
+  --color-button-bg: #{$color-button-bg-blue};
   --color-button-bg-hover: darken(#6db6ff, 15%);
-  --ripple-background: radial-gradient(
-    circle at center,
-    darken(--color-background-content, 10%) 0%,
-    darken(--color-background-content, 5%) 15%,
-    darken(--color-background-content, 0%) 25%,
-    #dd0012d2 40%,
-    #bb1818c9 60%,
-    #6e0000c7 71%,
-    #ca001bd5 84%,
-    #e00000d0 100%
-  );
 
   // Answer
   --color-highlight-ans: #3b6894;

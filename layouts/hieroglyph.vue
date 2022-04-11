@@ -1,9 +1,16 @@
 <template>
   <div>
     <div class="hieroglyph-layout-menu">
+      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
+        <NuxtLink to="/hieroglyph/add">-</NuxtLink>
+      </div>
       <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Collection</NuxtLink>
       <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink>
-      <!-- <NuxtLink to="/hieroglyph/my" class="first__item">Мои</NuxtLink> -->
+      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
+        <NuxtLink to="/hieroglyph/add">
+          <IconsAdd />
+        </NuxtLink>
+      </div>
     </div>
     <IconsWave />
     <section class="hieroglyph-layout">
@@ -16,6 +23,7 @@
 .hieroglyph-layout-menu {
   position: relative;
 
+  padding-top: 5px;
   height: 40px;
   width: 100%;
   z-index: 15;
@@ -31,6 +39,18 @@
     min-width: 100px;
     font-size: 1rem;
     text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_left {
+      margin-right: auto;
+    }
+
+    &_right {
+      margin-left: auto;
+    }
   }
 }
 
