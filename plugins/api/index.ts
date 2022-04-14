@@ -1,20 +1,24 @@
-import { defineNuxtPlugin } from '#app'
-import axios from 'axios'
+import { defineNuxtPlugin } from "#app"
+import axios from "axios"
 
-import { WordsApi } from './words'
-import { UserApi } from './user'
+import { WordApi } from "./word"
+import { UserApi } from "./user"
+import { HieroglyphApi } from "./hieroglyph"
+import { PinyinApi } from "./pinyin"
 
 export type ApiReturnType = {
-  words: ReturnType<typeof WordsApi>
+  word: ReturnType<typeof WordApi>
   user: ReturnType<typeof UserApi>
+  hieroglyph: ReturnType<typeof HieroglyphApi>
+  pinyin: ReturnType<typeof PinyinApi>
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const token = useCookie('token')
+  const token = useCookie("token")
 
   const api = (): ApiReturnType => {
     const instance = axios.create({
-      baseURL: useRuntimeConfig().API_URL || '',
+      baseURL: (useRuntimeConfig().API_URL || "") + "/api",
       // headers: {
       // Cookie: 'session-csl=' + useCookie('session-csl').value,
       // },
@@ -22,8 +26,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     })
 
     const apis = {
-      words: WordsApi,
+      word: WordApi,
       user: UserApi,
+      hieroglyph: HieroglyphApi,
+      pinyin: PinyinApi,
     }
 
     const result = Object.entries(apis).reduce((prev, [key, f]) => {

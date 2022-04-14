@@ -8,8 +8,14 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "types": ["node"],
+    "baseUrl": ".",
     "paths": {
-      "#app": ["./node_modules/nuxt3/dist/app/index"]
+      "#app": ["./node_modules/nuxt3/dist/app/index"],
+      "#/*": ["./*"],
+      "#components/*": ["./components/*"],
+      "#composables/*": ["./composables/*"],
+      "#types/*": ["./types/*"],
+      "#plugins/*": ["./plugins/*"]
     }
   }
 }

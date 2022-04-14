@@ -20,3 +20,12 @@ export const matchIdFromUrl = (str: string): number | null => {
 
   return +result[0]
 }
+
+//? 1
+export const matchChineseHieroglyph = (str: string) => /\p{Script=Han}/u.test(str)
+
+//? 2 dont work xD
+// export const matchChineseHieroglyph = (str: string) =>
+//   /^(\p{Block=CJK Unified Ideographs}|\p{Block=CJK Unified Ideographs Extension A}|\p{Block=CJK Unified Ideographs Extension B}|\p{Block=CJK Unified Ideographs Extension C}|\p{Block=CJK Unified Ideographs Extension D}|\p{Block=CJK Unified Ideographs Extension E}|\p{Block=CJK Unified Ideographs Extension F}|[\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29])+$/u.test(
+//     str,
+//   )

@@ -14,6 +14,10 @@
 <script lang="ts" setup>
 import { PropType } from "vue"
 
+const handleUpdate = () => {
+  console.log("afs")
+}
+
 defineProps({
   input: {
     type: Object as PropType<any>,

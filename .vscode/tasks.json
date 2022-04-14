@@ -5,7 +5,7 @@
       "type": "npm",
       "script": "dev",
       "problemMatcher": [],
-      "label": "Statr dev project",
+      "label": "Start dev project",
       "detail": "nuxi dev"
     }
   ]

@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from "nuxt3"
 
+import { resolve } from "path"
+
 export default defineNuxtConfig({
   //* build modules
   buildModules: ["@pinia/nuxt", "@nuxtjs/color-mode"],
@@ -14,6 +16,15 @@ export default defineNuxtConfig({
         scss: {
           additionalData: `@import "@/assets/scss/variables.scss";`,
         },
+      },
+    },
+    resolve: {
+      alias: {
+        "#": resolve(__dirname, "."),
+        "#components": resolve(__dirname, "components"),
+        "#composables": resolve(__dirname, "composables"),
+        "#types": resolve(__dirname, "types"),
+        "#plugins": resolve(__dirname, "plugins"),
       },
     },
   },

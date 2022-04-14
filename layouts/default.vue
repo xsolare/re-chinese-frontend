@@ -22,13 +22,6 @@ const currentRoute = computed(() => useRouter().currentRoute.value)
 const routeName = computed(() => currentRoute.value.name)
 const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ""))
 
-// import { useUserStore } from './store'
-
-// await useAsyncData('auth', async () => {
-//   const data = await useNuxtApp().$api().user.auth()
-//   if (data) useUserStore().setUserSettings(data)
-// })
-
 useMeta({
   meta: [
     { property: "og:title", content: "$t('meta.title')" },

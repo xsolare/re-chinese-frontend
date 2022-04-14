@@ -4,20 +4,17 @@
       <nav class="header-nav">
         <div class="header-nav__first first">
           <ul class="first__list">
-            <!-- <li> -->
-            <!-- <NuxtLink to="/" class="first__item">PinYin</NuxtLink> -->
-            <!-- </li> -->
             <li>
               <NuxtLink to="/pinyin" class="first__item">PinYin</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/hieroglyph" class="first__item">Hieroglyph</NuxtLink>
             </li>
-            <li>
+            <!-- <li>
               <NuxtLink to="/sentence" class="first__item">Sentence</NuxtLink>
-            </li>
+            </li> -->
             <li>
-              <NuxtLink to="/words" class="first__item">Words</NuxtLink>
+              <NuxtLink to="/word" class="first__item">Word</NuxtLink>
             </li>
           </ul>
         </div>
@@ -38,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '../../store/user'
+import { useUserStore } from "../../store/user"
 const config = useRuntimeConfig()
 </script>
 

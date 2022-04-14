@@ -1,71 +1,70 @@
 <template>
   <NuxtLayout name="hieroglyph">
-    <div class="hieroglyph-add">
-      <div class="hieroglyph-add-content">
-        <div class="hieroglyph-add-item">
-          <UiInput v-model:input.trim="pinyin">Pinyin</UiInput>
-          <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput>
+    <form @submit.prevent="handleCheckForm" class="hieroglyph-add">
+      <div class="hieroglyph-add-pinyin">
+        <div class="hieroglyph-add-header">
+          <h2>{{ pinyin }}</h2>
         </div>
-        <div class="hieroglyph-add-item">
-          <button
-            v-for="tone in tones"
-            @click="handleClickTone(tone.id)"
-            :key="tone.name"
-            :class="{ isEnable: tone.isEnable }"
-            class="hieroglyph-add-item__pinyin">
-            {{ tone.name }}
-          </button>
-        </div>
-        <div class="hieroglyph-add-item">
-          <UiSlider />
-        </div>
-        <div class="hieroglyph-add-item">
-          <div class="hieroglyph-add-item__submit">
-            <button>Submit</button>
+      </div>
+      <div class="hieroglyph-add-main">
+        <div class="hieroglyph-add-content">
+          <div class="hieroglyph-add-item">
+            <UiInput v-model:input.trim="pinyin">Pinyin</UiInput>
+            <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput>
+          </div>
+          <div class="hieroglyph-add-item">
+            <AddTone :currentTone="currentTone" :callback="handleClickTone" />
+          </div>
+          <div class="hieroglyph-add-item">
+            <UiSlider :currentHsk="currentHsk" :callback="handleClickHsk" />
+          </div>
+          <div class="hieroglyph-add-item">
+            <div
+              class="hieroglyph-add-item__submit"
+              :class="{ isDisabled: pinyinErrors?.length || hieroglyphErrors?.length }">
+              <button>Submit</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="hieroglyph-add-hieroglyph">
+        <div class="hieroglyph-add-header">
+          <h2>{{ hieroglyph }}</h2>
+        </div>
+      </div>
+    </form>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import { debounce } from "../../utils/browser"
+import { matchChineseHieroglyph } from "../../utils/regexp/index"
+
 const pinyin = ref("")
 const hieroglyph = ref("")
-const tones = reactive([
-  {
-    id: 1,
-    name: "1",
-    isSelected: false,
-    isEnable: false,
-  },
-  {
-    id: 2,
-    name: "2",
-    isSelected: false,
-    isEnable: false,
-  },
-  {
-    id: 3,
-    name: "3",
-    isSelected: false,
-    isEnable: false,
-  },
-  {
-    id: 4,
-    name: "4",
-    isSelected: false,
-    isEnable: false,
-  },
-  {
-    id: 5,
-    name: "5",
-    isSelected: false,
-    isEnable: false,
-  },
-])
 
-const handleClickTone = (id: number) => tones.map((x) => (x.isEnable = x.id === id ? true : false))
+const pinyinErrors = ref([])
+const hieroglyphErrors = ref([])
+
+const currentTone = ref(1)
+const currentHsk = ref(1)
+
+const handleClickTone = (id: number) => (currentTone.value = id)
+const handleClickHsk = (hsk: number) => (currentHsk.value = hsk)
+
+const gg = () => console.log("gg")
+
+const d_gg = debounce(gg, 1000)
+
+watchEffect(() => {
+  console.log("currentTone - ", currentTone.value)
+  d_gg()
+})
+
+const handleCheckForm = () => {
+  console.log("p - ", pinyin.value, "h - ", hieroglyph.value)
+  console.log("Check - ", matchChineseHieroglyph(hieroglyph.value))
+}
 
 definePageMeta({
   layout: "app",
@@ -74,9 +73,44 @@ definePageMeta({
 
 <style lang="scss" scoped>
 .hieroglyph-add {
-  max-width: 500px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hieroglyph-add-pinyin {
+  width: 100%;
+}
+
+.hieroglyph-add-main {
   padding: 5px;
+  max-width: 500px;
+  width: 100%;
+}
+.hieroglyph-add-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0;
+
+  h2 {
+    min-width: 50px;
+    min-height: 50px;
+    // border: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
+
+    border-radius: 5px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+}
+
+.hieroglyph-add-hieroglyph {
+  width: 100%;
 }
 
 .hieroglyph-add-content {
@@ -91,24 +125,6 @@ definePageMeta({
   gap: 5px;
   margin: 10px 0;
 
-  &__pinyin {
-    height: 35px;
-    width: 15%;
-    background-color: var(--color-background-content);
-    border: 1px solid var(--color-border);
-    border-radius: 25px;
-    text-align: center;
-    font-size: 1rem;
-    user-select: none;
-    cursor: pointer;
-    letter-spacing: 1px;
-
-    &.isEnable {
-      border: 2px solid var(--color-highlight);
-      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-  }
-
   &__submit {
     display: flex;
     align-items: center;
@@ -117,6 +133,7 @@ definePageMeta({
     margin-top: 25px;
 
     button {
+      cursor: pointer;
       height: 40px;
       width: 150px;
       background: var(--color-button-bg);
@@ -124,6 +141,13 @@ definePageMeta({
       color: aliceblue;
       font-size: 1.1rem;
       font-weight: 500;
+    }
+
+    &.isDisabled {
+      button {
+        pointer-events: none;
+        background: gray;
+      }
     }
   }
 }

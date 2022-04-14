@@ -6,29 +6,30 @@
     </div>
     <div class="range-value">
       <ul class="range-value__list">
-        <li
-          @click="handleChangeHsk(hsk)"
-          class="range-value__item"
-          :class="{ isActisve: activeHsk === hsk }"
-          v-for="hsk in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
-          :key="hsk">
+        <li v-for="hsk in [1, 2, 3, 4, 5, 6, 7, 8, 9]" @click="callback(hsk)" class="range-value__item" :key="hsk">
           {{ hsk }}
         </li>
-        <div ref="item" :style="{ left: item?.clientWidth * (activeHsk - 1) + 'px' }" />
+        <div ref="item" :style="{ left: item?.getBoundingClientRect().width * (currentHsk - 1) + 'px' }" />
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { ref, PropType } from "vue"
 
-const activeHsk = ref(1)
 const item = ref(null)
 
-const handleChangeHsk = (hsk: number) => {
-  activeHsk.value = hsk
-}
+defineProps({
+  currentHsk: {
+    type: Number,
+    required: true,
+  },
+  callback: {
+    type: Function as PropType<(hsk: number) => void>,
+    required: true,
+  },
+})
 </script>
 
 <style scoped lang="scss">
@@ -96,7 +97,7 @@ const handleChangeHsk = (hsk: number) => {
     position: relative;
     z-index: 10;
     user-select: none;
-    max-width: 50px;
+
     &:first-child {
       //   padding-left: 5px;
     }
