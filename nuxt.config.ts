@@ -25,6 +25,7 @@ export default defineNuxtConfig({
         "#composables": resolve(__dirname, "composables"),
         "#types": resolve(__dirname, "types"),
         "#plugins": resolve(__dirname, "plugins"),
+        "#utils": resolve(__dirname, "utils"),
       },
     },
   },

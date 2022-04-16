@@ -80,7 +80,7 @@ defineEmits(["update:input"])
 
     &:hover {
       cursor: text;
-      border-bottom: 2px solid var(--color-input-shadow);
+      border-bottom: 2px solid var(--color-highlight);
       transition: all 0.2s ease-in;
     }
 

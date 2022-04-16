@@ -13,10 +13,10 @@
             <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput>
           </div>
           <div class="hieroglyph-add-item">
-            <AddTone :currentTone="currentTone" :callback="handleClickTone" />
+            <HieroglyphHsk :currentHsk="currentHsk" :callback="handleClickHsk" />
           </div>
           <div class="hieroglyph-add-item">
-            <UiSlider :currentHsk="currentHsk" :callback="handleClickHsk" />
+            <HieroglyphPartOfSpeech :currentPartOfSpeech="currentPartOfSpeech" :callback="handlePartOfSpeech" />
           </div>
           <div class="hieroglyph-add-item">
             <div
@@ -37,8 +37,11 @@
 </template>
 
 <script lang="ts" setup>
-import { debounce } from "../../utils/browser"
-import { matchChineseHieroglyph } from "../../utils/regexp/index"
+import { IRangeHsk, hskSlider } from "#/types"
+import { debounce, matchChineseHieroglyph } from "#/utils"
+import { Ref } from "vue"
+
+//                                                                      //
 
 const pinyin = ref("")
 const hieroglyph = ref("")
@@ -46,20 +49,21 @@ const hieroglyph = ref("")
 const pinyinErrors = ref([])
 const hieroglyphErrors = ref([])
 
-const currentTone = ref(1)
-const currentHsk = ref(1)
+const currentTone: Ref<number> = ref(1)
+const currentHsk: Ref<IRangeHsk> = ref(hskSlider[0])
+const currentPartOfSpeech: Ref<number> = ref(1)
 
 const handleClickTone = (id: number) => (currentTone.value = id)
-const handleClickHsk = (hsk: number) => (currentHsk.value = hsk)
+const handleClickHsk = (hsk: IRangeHsk) => (currentHsk.value = hsk)
+const handlePartOfSpeech = (id: number) => (currentPartOfSpeech.value = id)
 
-const gg = () => console.log("gg")
-
-const d_gg = debounce(gg, 1000)
-
-watchEffect(() => {
-  console.log("currentTone - ", currentTone.value)
-  d_gg()
-})
+//TODO
+//? const gg = () => console.log("gg")
+//? const d_gg = debounce(gg, 1000)
+//? watchEffect(() => {
+//?   console.log("currentTone - ", currentTone.value)
+//?   d_gg()
+//? })
 
 const handleCheckForm = () => {
   console.log("p - ", pinyin.value, "h - ", hieroglyph.value)

@@ -1,73 +1,47 @@
 <template>
-  <div class="hsk-range">
-    <div class="hsk-range__title">
-      <div />
-      <h2>hsk</h2>
-    </div>
-    <div class="range-value">
-      <ul class="range-value__list">
-        <li v-for="hsk in [1, 2, 3, 4, 5, 6, 7, 8, 9]" @click="callback(hsk)" class="range-value__item" :key="hsk">
-          {{ hsk }}
-        </li>
-        <div ref="item" :style="{ left: item?.getBoundingClientRect().width * (currentHsk - 1) + 'px' }" />
-      </ul>
-    </div>
+  <div class="range-value">
+    <ul class="range-value__list">
+      <li v-for="r in range" @click="callback(r)" class="range-value__item" :key="r.index">
+        {{ r.value }}
+      </li>
+      <div
+        ref="item"
+        :style="{
+          left: item?.getBoundingClientRect().width * current.index + 'px',
+          width: 100 / range.length + '%',
+        }" />
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { IRange } from "#/types"
 import { ref, PropType } from "vue"
 
 const item = ref(null)
 
 defineProps({
-  currentHsk: {
-    type: Number,
+  range: {
+    type: Array as PropType<IRange[]>,
+    required: true,
+  },
+  current: {
+    type: Object as PropType<IRange>,
     required: true,
   },
   callback: {
-    type: Function as PropType<(hsk: number) => void>,
+    type: Function as PropType<(value: IRange) => void>,
     required: true,
   },
 })
 </script>
 
-<style scoped lang="scss">
-.hsk-range {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  &__title {
-    position: relative;
-    width: 100%;
-
-    h2 {
-      text-align: center;
-      background-color: var(--color-background);
-
-      width: 80px;
-      margin: 10px auto;
-      z-index: 5;
-      position: relative;
-      font-weight: 500;
-    }
-
-    div {
-      z-index: 1;
-      position: absolute;
-      top: 50%;
-      height: 1px;
-      width: 100%;
-      background-color: var(--color-border);
-    }
-  }
-}
-
+<style lang="scss" scoped>
 .range-value {
   width: 100%;
 
   &__list {
+    margin: 5px 0;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -80,9 +54,9 @@ defineProps({
     // margin: 0;
 
     div {
-      width: calc(100% / 9);
       height: 30px;
-      background: var(--color-button-bg);
+      // background: var(--color-button-bg);
+      background-color: var(--color-highlight);
 
       position: absolute;
       left: 0;

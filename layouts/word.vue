@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="hieroglyph-layout-menu">
-      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
-        <NuxtLink to="/hieroglyph/add">-</NuxtLink>
+    <div class="word-layout-menu">
+      <div class="word-layout-menu__item word-layout-menu__item_left">
+        <NuxtLink to="/word/add">xD</NuxtLink>
       </div>
-      <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Collection</NuxtLink>
-      <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink>
-      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
-        <NuxtLink to="/hieroglyph/add">
+      <NuxtLink to="/word/" class="word-layout-menu__item">Ad</NuxtLink>
+      <NuxtLink to="/word/all" class="word-layout-menu__item">Dobavit'</NuxtLink>
+      <div class="word-layout-menu__item word-layout-menu__item_right">
+        <NuxtLink to="/word/add">
           <IconsAdd />
         </NuxtLink>
       </div>
     </div>
     <IconsWave />
-    <section class="hieroglyph-layout">
+    <section class="word-layout">
       <slot />
     </section>
   </div>
 </template>
 
 <style scoped lang="scss">
-.hieroglyph-layout-menu {
+.word-layout-menu {
   position: relative;
 
   padding-top: 5px;
@@ -46,17 +46,11 @@
 
     &_left {
       margin-right: auto;
-      min-width: 60px;
     }
 
     &_right {
       margin-left: auto;
-      min-width: 60px;
     }
   }
 }
-
-// .hieroglyph-layout {
-//   height: 100%;
-// }
 </style>

@@ -15,7 +15,8 @@
       "#components/*": ["./components/*"],
       "#composables/*": ["./composables/*"],
       "#types/*": ["./types/*"],
-      "#plugins/*": ["./plugins/*"]
+      "#plugins/*": ["./plugins/*"],
+      "#utils/*": ["./utils/*"]
     }
   }
 }

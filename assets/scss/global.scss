@@ -8,7 +8,7 @@
   --color-header-icon: #8b8c8d;
   --color-footer: #8b8c8d;
   --color-footer-hover: #6db6ff;
-  --color-highlight: #6db6ff;
+  --color-highlight: #{$color-highlight};
   --color-shadow-highlight: rgb(167, 167, 167);
 
   --color-background: #eeeeee;
@@ -34,6 +34,10 @@
   --color-toast-bg: rgba(255, 255, 255, 0.6);
   --color-button-bg: #{$color-button-bg};
   --color-button-bg-hover: darken(rgba(255, 255, 255, 0.6), 15%);
+
+  // Transalate
+  --color-send-bg: #4aff90;
+  --color-cancel-bg: #ff4967;
 
   // Answer
   --color-yes-bg: #4aff90;
@@ -78,7 +82,7 @@
   // Etc
   // --color-highlight: rgb(255, 71, 71);
   // --color-highlight: rgb(86, 219, 74);
-  --color-highlight: #6db6ff;
+  --color-highlight: #{$color-highlight-dark};
 
   --color-shadow-highlight: rgb(36, 36, 36);
 
@@ -122,6 +126,7 @@
 
   // Answer
   --color-highlight-ans: #3b6894;
+  --color-highlight: #{$color-highlight-blue};
 }
 
 html {

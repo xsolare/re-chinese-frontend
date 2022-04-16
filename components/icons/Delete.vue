@@ -7,7 +7,7 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .icon {
   fill: var(--color-text);
 }

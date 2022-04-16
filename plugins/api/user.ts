@@ -1,15 +1,15 @@
-import { ISteamUser } from 'types/store'
-import { AxiosInstance } from 'axios'
+import { AxiosInstance } from "axios"
+import { IUser } from "#types/store"
 
 export const UserApi = (instance: AxiosInstance) => ({
-  async auth(): Promise<ISteamUser> {
-    const { data } = await instance.put<ISteamUser>('/auth')
+  async auth(): Promise<IUser> {
+    const { data } = await instance.put<IUser>("/auth")
 
     return data
   },
 
   async getOne(id: number) {
-    const { data } = await instance.get<ISteamUser>('/user/', {
+    const { data } = await instance.get<IUser>("/user/", {
       params: {
         id,
       },
@@ -18,7 +18,7 @@ export const UserApi = (instance: AxiosInstance) => ({
   },
 
   async getAll() {
-    const { data } = await instance.get<ISteamUser[]>('/user', {})
+    const { data } = await instance.get<IUser[]>("/user", {})
     return data
   },
 })

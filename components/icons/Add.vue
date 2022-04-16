@@ -8,7 +8,7 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .add {
   fill: var(--color-text);
   height: 26px;

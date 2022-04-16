@@ -32,6 +32,7 @@ $ripple-easing: cubic-bezier(0, 0.5, 0.5, 1.2);
 $color-background-content: #e4e4e4;
 $color-background-modal: #333;
 $color-button-bg: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
+$color-highlight: #6db6ff;
 
 //* Dark theme
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +40,8 @@ $color-button-bg: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
 //? Background
 $color-background-content-dark: #161718;
 $color-background-modal-dark: rgb(22, 22, 22);
-$color-button-bg-dark: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
+$color-button-bg-dark: linear-gradient(290.47deg, #ff8856 11.33%, #ffaa86 83.66%);
+$color-highlight-dark: #ff8856;
 
 //* Blue theme
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +50,7 @@ $color-button-bg-dark: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%
 $color-background-content-blue: #161b22;
 $color-background-modal-blue: #1b222c;
 $color-button-bg-blue: linear-gradient(290.47deg, #3797fa 11.33%, #45c9ff 83.66%);
+$color-highlight-blue: #6db6ff;
 
 %ellipsis {
   overflow: hidden;

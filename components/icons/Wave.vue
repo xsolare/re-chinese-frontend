@@ -8,7 +8,7 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .footer {
   width: 100%;
   min-height: 15px;
