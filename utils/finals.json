@@ -1,0 +1,192 @@
+[
+    {
+        "Id": 1,
+        "name": "a",
+        "pos": 1
+    },
+    {
+        "Id": 2,
+        "name": "o",
+        "pos": 2
+    },
+    {
+        "Id": 3,
+        "name": "e",
+        "pos": 3
+    },
+    {
+        "Id": 4,
+        "name": "i",
+        "pos": 4
+    },
+    {
+        "Id": 5,
+        "name": "i",
+        "pos": 5
+    },
+    {
+        "Id": 6,
+        "name": "er",
+        "pos": 6
+    },
+    {
+        "Id": 7,
+        "name": "ai",
+        "pos": 7
+    },
+    {
+        "Id": 8,
+        "name": "ei",
+        "pos": 8
+    },
+    {
+        "Id": 9,
+        "name": "ao",
+        "pos": 9
+    },
+    {
+        "Id": 10,
+        "name": "ou",
+        "pos": 10
+    },
+    {
+        "Id": 11,
+        "name": "an",
+        "pos": 11
+    },
+    {
+        "Id": 12,
+        "name": "en",
+        "pos": 12
+    },
+    {
+        "Id": 13,
+        "name": "ang",
+        "pos": 13
+    },
+    {
+        "Id": 14,
+        "name": "eng",
+        "pos": 14
+    },
+    {
+        "Id": 15,
+        "name": "ong",
+        "pos": 15
+    },
+    {
+        "Id": 16,
+        "name": "i",
+        "pos": 16
+    },
+    {
+        "Id": 17,
+        "name": "ia",
+        "pos": 17
+    },
+    {
+        "Id": 18,
+        "name": "iao",
+        "pos": 18
+    },
+    {
+        "Id": 19,
+        "name": "ie",
+        "pos": 19
+    },
+    {
+        "Id": 20,
+        "name": "iu",
+        "pos": 20
+    },
+    {
+        "Id": 21,
+        "name": "ian",
+        "pos": 21
+    },
+    {
+        "Id": 22,
+        "name": "in",
+        "pos": 22
+    },
+    {
+        "Id": 23,
+        "name": "iang",
+        "pos": 23
+    },
+    {
+        "Id": 24,
+        "name": "ing",
+        "pos": 24
+    },
+    {
+        "Id": 25,
+        "name": "iong",
+        "pos": 25
+    },
+    {
+        "Id": 26,
+        "name": "u",
+        "pos": 26
+    },
+    {
+        "Id": 27,
+        "name": "ua",
+        "pos": 27
+    },
+    {
+        "Id": 28,
+        "name": "uo",
+        "pos": 28
+    },
+    {
+        "Id": 29,
+        "name": "uai",
+        "pos": 29
+    },
+    {
+        "Id": 30,
+        "name": "ui",
+        "pos": 30
+    },
+    {
+        "Id": 31,
+        "name": "uan",
+        "pos": 31
+    },
+    {
+        "Id": 32,
+        "name": "un",
+        "pos": 32
+    },
+    {
+        "Id": 33,
+        "name": "uang",
+        "pos": 33
+    },
+    {
+        "Id": 34,
+        "name": "ueng",
+        "pos": 34
+    },
+    {
+        "Id": 35,
+        "name": "ü",
+        "pos": 35
+    },
+    {
+        "Id": 36,
+        "name": "üe",
+        "pos": 36
+    },
+    {
+        "Id": 37,
+        "name": "üan",
+        "pos": 37
+    },
+    {
+        "Id": 38,
+        "name": "ün",
+        "pos": 38
+    }
+]
