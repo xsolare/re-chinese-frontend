@@ -1,4 +1,4 @@
-import { ApiStatus } from '..'
+import { ApiStatus } from ".."
 
 //* State
 export interface WordsState {
@@ -28,7 +28,7 @@ export interface IWord {
   pinyin: string
   translate: string
   hsk: number
-  type: string
+  partOfSpeechId: string
 }
 
 export interface ICurrentWord {

@@ -10,7 +10,7 @@ export const WordApi = (instance: AxiosInstance) => ({
   //   return data
   // },
   // async getAll() {
-  //   const { data } = await instance.get<IWords[]>('/words', {})
+  //   const { data } = await instance.get<IWords[]>("/words", {})
   //   return data
   // },
 })

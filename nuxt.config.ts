@@ -4,10 +4,15 @@ import { resolve } from "path"
 
 export default defineNuxtConfig({
   //* build modules
-  buildModules: ["@pinia/nuxt", "@nuxtjs/color-mode"],
+  buildModules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxtjs/color-mode"],
 
   //* css
   css: ["@/assets/scss/index.scss"],
+
+  //* vueuse
+  vueuse: {
+    ssrHandlers: true,
+  },
 
   //* vite
   vite: {
@@ -33,6 +38,7 @@ export default defineNuxtConfig({
   //* env
   publicRuntimeConfig: {
     API_URL: process.env.API_URL || "http://localhost:8080",
+    JWT_HEADER: process.env.JWT_HEADER || "x-token",
   },
 
   //* modules

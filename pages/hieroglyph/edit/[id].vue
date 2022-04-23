@@ -35,7 +35,6 @@ const currentPartOfSpeech = ref(1)
 
 const handleClickHsk = (hsk: IRangeHsk) => (currentHsk.value = hsk)
 const handlePartOfSpeech = (id: number) => (currentPartOfSpeech.value = id)
-
 const handleCheckForm = () => {}
 
 definePageMeta({

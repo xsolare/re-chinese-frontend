@@ -5,53 +5,53 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore, useProgressTaskStore } from '../../store'
+import { useWordsStore, useProgressTaskStore } from "../../store"
 
 const wordsStore = useWordsStore()
 const progressTaskStore = useProgressTaskStore()
 
-await useAsyncData('words', async () => {
+await useAsyncData("words", async () => {
   wordsStore.$patch({
     words: [
       {
         id: 1,
-        original: '数字',
-        pinyin: 'shùzì',
-        translate: 'номер',
+        original: "数字",
+        pinyin: "shùzì",
+        translate: "номер",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
       {
         id: 2,
-        original: '几号',
-        pinyin: 'jǐhào',
-        translate: 'цифра',
+        original: "几号",
+        pinyin: "jǐhào",
+        translate: "цифра",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
       {
         id: 3,
-        original: '你好',
-        pinyin: 'nǐ hǎo',
-        translate: 'привет',
+        original: "你好",
+        pinyin: "nǐ hǎo",
+        translate: "привет",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
       {
         id: 4,
-        original: '而',
-        pinyin: 'ér',
-        translate: 'пока  ',
+        original: "而",
+        pinyin: "ér",
+        translate: "пока  ",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
       {
         id: 5,
-        original: '帅',
-        pinyin: 'shuài',
-        translate: 'красивый',
+        original: "帅",
+        pinyin: "shuài",
+        translate: "красивый",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
     ],
     settings: {
@@ -63,11 +63,11 @@ await useAsyncData('words', async () => {
       typeQuestion: 0,
       word: {
         id: 1,
-        original: '数字',
-        pinyin: 'shùzì',
-        translate: 'номер',
+        original: "数字",
+        pinyin: "shùzì",
+        translate: "номер",
         hsk: 1,
-        type: 'noun',
+        type: "noun",
       },
     },
   })
@@ -79,7 +79,7 @@ await useAsyncData('words', async () => {
 })
 
 definePageMeta({
-  layout: 'task',
+  layout: "task",
 })
 </script>
 

@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { IUser, UserState } from '../types/store/user'
+import { defineStore } from "pinia"
+import { IUser, UserState } from "../types/store/user"
 
 //* =======================================================================================
 //* User store
 //* =======================================================================================
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore("user", {
   state: () =>
     ({
       isLoggedIn: false,
@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', {
       this.isLoggedIn = true
     },
     removeUserSettings() {
-      useCookie('session-csl').value = null
+      useCookie(useRuntimeConfig().JWT_HEADER).value = null
       this.userInfo = {} as IUser
       this.isLoggedIn = false
     },

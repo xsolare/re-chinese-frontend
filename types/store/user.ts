@@ -5,21 +5,21 @@ export interface UserState {
 
 export interface IUser {
   id: number
-  personaname: string
-  lastlogoff: number
-  profileurl: string
+  username: string
   avatar: string
-  avatarmedium: string
-  avatarfull: string
-  realname: string
-  timecreated: number
-  loccountrycode: string
-  created_at: Date
-  updated_at: Date
+  updatedAt: Date
+  createdAt: Date
+  lastLogin: Date
+  roles: IRole[]
 }
 
-export enum Role {
-  USER = 'user',
-  PREMIUM = 'premium',
-  ADMIN = 'admin',
+interface IRole {
+  id: number
+  name: RoleEnum
+}
+
+export enum RoleEnum {
+  USER = "user",
+  PREMIUM = "premium",
+  ADMIN = "admin",
 }
