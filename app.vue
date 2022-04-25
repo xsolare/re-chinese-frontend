@@ -13,8 +13,11 @@ const systemStore = useSystemStore()
 
 useAsyncData("auth", async () => {
   if (!systemStore.isInit) {
-    userStore.setUserSettings($auth.user)
-    useCookie(useRuntimeConfig().JWT_HEADER).value = $auth.jwt
+    try {
+      userStore.setUserSettings($auth.user)
+      useCookie(useRuntimeConfig().JWT_HEADER).value = $auth.jwt
+    } catch (e) {}
+
     systemStore.$patch({ isInit: true })
   }
 })

@@ -10,12 +10,12 @@ export enum ApiStatus {
 export interface IPinyin {
   id: number
   pinyin: string
-  initial_id: number
-  final_id: number
-  final_tone_id: number
+  initialId: number
+  finalId: number
+  finalToneId: number
   tone: number
-  final_pos: number
-  initial_pos: number
+  finalPos: number
+  initialPos: number
 }
 
 export interface IFinals {

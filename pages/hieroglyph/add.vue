@@ -9,15 +9,21 @@
       <div class="hieroglyph-add-main">
         <div class="hieroglyph-add-content">
           <div class="hieroglyph-add-item">
-            <UiInput v-model:input.trim="pinyin">Pinyin</UiInput>
-            <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput>
+            <!-- <UiInput v-model:input.trim="pinyin">Pinyin</UiInput> -->
+            <!-- <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput> -->
+            <div class="hieroglyph-add-fields">
+              <SelectPinyin v-model:input.trim="pinyin" />
+              <UiInputHieroglyph v-model:input.trim="hieroglyph">Hieroglyph</UiInputHieroglyph>
+              <!-- <span class="hieroglyph-add-fields__pinyin">shi</span> -->
+              <!-- <h2 class="hieroglyph-add-fields__hieroglyph">取</h2> -->
+            </div>
           </div>
           <div class="hieroglyph-add-item">
             <HieroglyphHsk :currentHsk="currentHsk" :callback="handleClickHsk" />
           </div>
-          <div class="hieroglyph-add-item">
-            <HieroglyphPartOfSpeech :currentPartOfSpeech="currentPartOfSpeech" :callback="handlePartOfSpeech" />
-          </div>
+          <!-- <div class="hieroglyph-add-item"> -->
+          <!-- <HieroglyphPartOfSpeech :currentPartOfSpeech="currentPartOfSpeech" :callback="handlePartOfSpeech" /> -->
+          <!-- </div> -->
           <div class="hieroglyph-add-item">
             <div
               class="hieroglyph-add-item__submit"
@@ -76,13 +82,43 @@ definePageMeta({
 </script>
 
 <style lang="scss" scoped>
+.hieroglyph-add-fields {
+  // background-color: var(--color-background-content);
+  // box-shadow: 0 0 4px var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 150px;
+  max-width: 200px;
+  border-radius: 10px;
+  padding: 5px 25px;
+
+  &__pinyin {
+    font-size: 2rem;
+  }
+
+  &__hieroglyph {
+    font-size: 4rem;
+    margin: 5px;
+    font-weight: 500;
+  }
+}
+
 .hieroglyph-add {
   display: flex;
   justify-content: space-between;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  flex-direction: row;
 }
 
-.hieroglyph-add-pinyin {
+.hieroglyph-add-pinyin,
+.hieroglyph-add-hieroglyph {
   width: 100%;
+  display: none;
 }
 
 .hieroglyph-add-main {
@@ -90,6 +126,7 @@ definePageMeta({
   max-width: 500px;
   width: 100%;
 }
+
 .hieroglyph-add-header {
   display: flex;
   justify-content: center;
@@ -113,10 +150,6 @@ definePageMeta({
   }
 }
 
-.hieroglyph-add-hieroglyph {
-  width: 100%;
-}
-
 .hieroglyph-add-content {
   display: flex;
   flex-direction: column;
@@ -125,7 +158,7 @@ definePageMeta({
 .hieroglyph-add-item {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   gap: 5px;
   margin: 10px 0;
 

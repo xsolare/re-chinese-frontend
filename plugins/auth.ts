@@ -7,7 +7,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   let isAuthed: boolean = false
 
   try {
-    data = await api().user.auth()
+    // data = await api().user.auth()
     isAuthed = true
   } catch (err) {}
 

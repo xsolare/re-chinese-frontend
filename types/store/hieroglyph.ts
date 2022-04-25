@@ -13,7 +13,7 @@ export interface IHieroglyph {
   id: number
   hieroglyph: string
   hsk: number
-  pinyin_id: number
-  part_of_speech_id: number
+  pinyinId: number
+  partOfSpeechId: number
   translate: []
 }

@@ -17,12 +17,11 @@ export const api = (): ApiReturnType => {
 
   const instance = axios.create({
     baseURL: (env.API_URL || "") + "/api",
-    headers: {
-      [env.JWT_HEADER]: useCookie(env.JWT_HEADER).value,
-    },
-    withCredentials: true,
+    // headers: {
+    //   [env.JWT_HEADER]: useCookie(env.JWT_HEADER)?.value || "",
+    // },
+    // withCredentials: true,
   })
-
   const apis = {
     user: UserApi,
     word: WordApi,

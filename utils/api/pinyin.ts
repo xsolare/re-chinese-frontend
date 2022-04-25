@@ -15,18 +15,19 @@ interface IApiInitials extends IApiResponse {
 ///                                                                                 //
 
 export const PinyinApi = (instance: AxiosInstance) => ({
-  async getByTone(tone: string) {
-    const { data } = await instance.get<IApiPinyin>("/pinyin/by-tone/" + tone, {})
+  async getFull() {
+    const { data } = await instance.get<IApiPinyin>("/pinyin/")
+
     return data.data as IPinyin[]
   },
 
-  async getFull() {
-    const { data } = await instance.get<IApiPinyin>("/pinyin/", {})
+  async getByTone(tone: string) {
+    const { data } = await instance.get<IApiPinyin>("/pinyin/by-tone" + tone, {})
     return data.data as IPinyin[]
   },
 
   async getFinals() {
-    const { data } = await instance.get<IApiFinals>("/pinyin/finals", {})
+    const { data } = await instance.get<IApiFinals>("/pinyin/finals")
     return data.data as IFinals[]
   },
 
