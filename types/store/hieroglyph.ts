@@ -14,6 +14,4 @@ export interface IHieroglyph {
   hieroglyph: string
   hsk: number
   pinyinId: number
-  partOfSpeechId: number
-  translate: []
 }

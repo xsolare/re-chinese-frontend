@@ -2,14 +2,16 @@
   <div>
     <div class="hieroglyph-layout-menu">
       <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
-        <NuxtLink to="/hieroglyph/add">-</NuxtLink>
+        <!-- <NuxtLink to="/hieroglyph/add">
+          <IconsMenu />
+        </NuxtLink> -->
       </div>
       <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Collection</NuxtLink>
       <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink>
       <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
-        <NuxtLink to="/hieroglyph/add">
+        <!-- <NuxtLink to="/hieroglyph/add">
           <IconsAdd />
-        </NuxtLink>
+        </NuxtLink> -->
       </div>
     </div>
     <IconsWave />

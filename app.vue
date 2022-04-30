@@ -1,7 +1,9 @@
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -11,14 +13,14 @@ const { $auth } = useNuxtApp()
 const userStore = useUserStore()
 const systemStore = useSystemStore()
 
-useAsyncData("auth", async () => {
-  if (!systemStore.isInit) {
-    try {
-      userStore.setUserSettings($auth.user)
-      useCookie(useRuntimeConfig().JWT_HEADER).value = $auth.jwt
-    } catch (e) {}
-
-    systemStore.$patch({ isInit: true })
+// useAsyncData("auth", async () => {
+if (!systemStore.isInit) {
+  if ($auth.isAuthed) {
+    userStore.setUserSettings($auth.user)
+    useCookie(useRuntimeConfig().JWT_HEADER).value = $auth.jwt
   }
-})
+
+  systemStore.$patch({ isInit: true })
+}
+// })
 </script>

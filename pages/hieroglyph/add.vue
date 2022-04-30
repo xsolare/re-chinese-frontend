@@ -1,41 +1,29 @@
 <template>
   <NuxtLayout name="hieroglyph">
     <form @submit.prevent="handleCheckForm" class="hieroglyph-add">
-      <div class="hieroglyph-add-pinyin">
-        <div class="hieroglyph-add-header">
-          <h2>{{ pinyin }}</h2>
-        </div>
-      </div>
       <div class="hieroglyph-add-main">
         <div class="hieroglyph-add-content">
           <div class="hieroglyph-add-item">
-            <!-- <UiInput v-model:input.trim="pinyin">Pinyin</UiInput> -->
-            <!-- <UiInput v-model:input.trim="hieroglyph">Hieroglyph</UiInput> -->
-            <div class="hieroglyph-add-fields">
-              <SelectPinyin v-model:input.trim="pinyin" />
+            <div @click.capture.prevent class="hieroglyph-add-fields">
               <UiInputHieroglyph v-model:input.trim="hieroglyph">Hieroglyph</UiInputHieroglyph>
-              <!-- <span class="hieroglyph-add-fields__pinyin">shi</span> -->
-              <!-- <h2 class="hieroglyph-add-fields__hieroglyph">取</h2> -->
+              <UiSelectPinyin :value="pinyin" :callback="handleClickPinyin" />
             </div>
           </div>
           <div class="hieroglyph-add-item">
-            <HieroglyphHsk :currentHsk="currentHsk" :callback="handleClickHsk" />
+            <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
           </div>
-          <!-- <div class="hieroglyph-add-item"> -->
-          <!-- <HieroglyphPartOfSpeech :currentPartOfSpeech="currentPartOfSpeech" :callback="handlePartOfSpeech" /> -->
-          <!-- </div> -->
           <div class="hieroglyph-add-item">
-            <div
-              class="hieroglyph-add-item__submit"
-              :class="{ isDisabled: pinyinErrors?.length || hieroglyphErrors?.length }">
+            <div class="hieroglyph-add-item__errors">
+              <span>{{ pinyinErrors[0] }}</span>
+              <span>{{ hieroglyphErrors[0] }}</span>
+            </div>
+          </div>
+          <div class="hieroglyph-add-item">
+            <!-- <div class="hieroglyph-add-item__submit" :class="{ isDisabled: !hieroglyph || !pinyin }"> -->
+            <div class="hieroglyph-add-item__submit">
               <button>Submit</button>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="hieroglyph-add-hieroglyph">
-        <div class="hieroglyph-add-header">
-          <h2>{{ hieroglyph }}</h2>
         </div>
       </div>
     </form>
@@ -43,38 +31,70 @@
 </template>
 
 <script lang="ts" setup>
-import { IRangeHsk, hskSlider } from "#/types"
-import { debounce, matchChineseHieroglyph } from "#/utils"
+import { IRangeHsk, hskSlider, IPinyin } from "#/types"
+import { matchChineseHieroglyph } from "#/utils"
 import { Ref } from "vue"
 
 //                                                                      //
+const { $api } = useNuxtApp()
 
-const pinyin = ref("")
-const hieroglyph = ref("")
+const pinyin: Ref<IPinyin | null> = ref(null)
+const hieroglyph: Ref<string> = ref("")
+const hsk: Ref<IRangeHsk> = ref(hskSlider[0])
 
 const pinyinErrors = ref([])
 const hieroglyphErrors = ref([])
 
-const currentTone: Ref<number> = ref(1)
-const currentHsk: Ref<IRangeHsk> = ref(hskSlider[0])
-const currentPartOfSpeech: Ref<number> = ref(1)
+const handleClickPinyin = (value: IPinyin) => (pinyin.value = value)
+const handleClickHsk = (value: IRangeHsk) => (hsk.value = value)
+const handleCheckForm = async () => {
+  pinyinErrors.value = []
+  hieroglyphErrors.value = []
+  let isErrors = 0
 
-const handleClickTone = (id: number) => (currentTone.value = id)
-const handleClickHsk = (hsk: IRangeHsk) => (currentHsk.value = hsk)
-const handlePartOfSpeech = (id: number) => (currentPartOfSpeech.value = id)
+  console.log("p - ", pinyin.value?.id, "h - ", hieroglyph.value)
 
-//TODO
-//? const gg = () => console.log("gg")
-//? const d_gg = debounce(gg, 1000)
-//? watchEffect(() => {
-//?   console.log("currentTone - ", currentTone.value)
-//?   d_gg()
-//? })
+  if (hieroglyph.value === "") {
+    //& in real not needed
+    hieroglyphErrors.value.push("Hieroglyph field empty")
+    isErrors += 1
+  } else if (!matchChineseHieroglyph(hieroglyph.value)) {
+    //& in real not needed
+    hieroglyphErrors.value.push("Not chinese hieroglyph")
+    isErrors += 1
+  } else {
+    const isExist = await $api().hieroglyph.getByHieroglyph(hieroglyph.value)
 
-const handleCheckForm = () => {
-  console.log("p - ", pinyin.value, "h - ", hieroglyph.value)
-  console.log("Check - ", matchChineseHieroglyph(hieroglyph.value))
+    if (isExist.length > 0) {
+      hieroglyphErrors.value.push("Hieroglyph is exist")
+      isErrors += 1
+    }
+  }
+
+  //& in real not needed
+  if (pinyin.value === null) {
+    pinyinErrors.value.push("Pinyin field empty")
+    isErrors += 1
+  }
+
+  if (!isErrors) {
+    try {
+      const newHieroglyph = await $api().hieroglyph.add({
+        hieroglyph: hieroglyph.value,
+        pinyinId: pinyin.value.id,
+        hsk: +hsk.value.value,
+      })
+      console.log("newHieroglyph", newHieroglyph)
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
 }
+
+watchEffect(() => {
+  hieroglyph.value
+  hieroglyphErrors.value = []
+})
 
 definePageMeta({
   layout: "app",
@@ -115,39 +135,10 @@ definePageMeta({
   flex-direction: row;
 }
 
-.hieroglyph-add-pinyin,
-.hieroglyph-add-hieroglyph {
-  width: 100%;
-  display: none;
-}
-
 .hieroglyph-add-main {
   padding: 5px;
   max-width: 500px;
   width: 100%;
-}
-
-.hieroglyph-add-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 25px 0;
-
-  h2 {
-    min-width: 50px;
-    min-height: 50px;
-    // border: 2px solid var(--color-border);
-    border-top: 2px solid var(--color-border);
-    border-bottom: 2px solid var(--color-border);
-
-    border-radius: 5px;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    line-height: 50px;
-    font-weight: 500;
-    letter-spacing: 1px;
-  }
 }
 
 .hieroglyph-add-content {
@@ -167,7 +158,7 @@ definePageMeta({
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 25px;
+    margin: 5px 0;
 
     button {
       cursor: pointer;
@@ -186,6 +177,17 @@ definePageMeta({
         background: gray;
       }
     }
+  }
+
+  &__errors {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-error);
+    font-size: 1rem;
   }
 }
 </style>

@@ -28,7 +28,7 @@
   --color-input-shadow: rgba(79, 137, 246, 0.8);
   --color-input-border: #adadad;
 
-  --color-border: #53535378;
+  --color-border: #7e7e7e;
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
   --color-toast-bg: rgba(255, 255, 255, 0.6);
@@ -47,9 +47,12 @@
   --color-highlight-ans: #99ccff;
 
   // Pinyin
-  --color-initial: #ffbec290;
-  --color-final: #85e3ff90;
-  --color-pinyin-hover: #99ccff70;
+  --color-initial: #ffbec2;
+  --color-final: #85e3ff;
+  --color-pinyin-hover: #99ccff;
+
+  // ETC
+  --color-error: tomato;
 }
 
 .dark-mode {
@@ -78,7 +81,7 @@
   --color-background-modal-content: darken(#{$color-background-modal-dark}, 5%);
 
   --color-input-bg: #{$color-background-content-dark};
-  --color-border: #4747478f;
+  --color-border: #474747;
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
   --color-button-bg: #{$color-button-bg-dark};
@@ -122,7 +125,7 @@
   --color-background-modal-content: darken(#{$color-background-modal-blue}, 5%);
 
   --color-input-bg: --color-background-content;
-  --color-border: #4747478f;
+  --color-border: #474747;
   --color-border-highlight: #8fb2ff78;
   --color-disabled: #c5c8ce;
   --color-toast-bg: rgba(0, 0, 0, 0.6);

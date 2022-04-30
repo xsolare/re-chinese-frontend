@@ -5,30 +5,47 @@
         <div class="header-nav__first first">
           <ul class="first__list">
             <li>
-              <NuxtLink to="/pinyin" class="first__item">PinYin</NuxtLink>
+              <NuxtLink to="/pinyin" class="first__item mobile">
+                <IconsDashboard />
+                <span>Пиньин</span>
+              </NuxtLink>
+              <NuxtLink to="/pinyin" class="first__item">Пиньин</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/hieroglyph" class="first__item">Hieroglyph</NuxtLink>
+              <NuxtLink to="/hieroglyph" class="first__item mobile">
+                <IconsDashboard />
+                <span>Иероглифы</span>
+              </NuxtLink>
+              <NuxtLink to="/hieroglyph" class="first__item">Иероглифы</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="/word" class="first__item mobile">
+                <IconsDashboard />
+                <span>Слова</span>
+              </NuxtLink>
+              <NuxtLink to="/word" class="first__item">Слова</NuxtLink>
             </li>
             <!-- <li>
-              <NuxtLink to="/sentence" class="first__item">Sentence</NuxtLink>
+              <NuxtLink to="/handbook" class="first__item mobile">
+                <IconsDashboard />
+                <span>Учебник</span>
+              </NuxtLink>
+              <NuxtLink to="/handbook" class="first__item">Учебник</NuxtLink>
             </li> -->
-            <li>
-              <NuxtLink to="/word" class="first__item">Word</NuxtLink>
-            </li>
           </ul>
         </div>
-        <!-- <div class="header-nav__second second">
+        <div class="header-nav__second second">
           <ul class="second__list">
             <li v-if="!useUserStore().isLoggedIn">
-              <a class="second__signin" :href="config.API_URL + '/login'"> Sign In </a>
+              <!-- <div class="second__signin mobile" :href="config.API_URL + '/signin'">S</div> -->
+              <div class="second__signin" @click="signInTest">Sign In</div>
             </li>
-            <li v-else>
-              <span class="second__is-logged">IsLogged as {{ useUserStore().userInfo?.personaname || '' }}</span>
-              <button class="second__logout" @click="useUserStore().emoveUserSettings()">Logout</button>
-            </li>
+            <!-- <li v-else>
+              <span class="second__is-logged">IsLogged as {{ useUserStore().userInfo?.personaname || "" }}</span>
+              <button class="second__logout" @click="useUserStore().removeUserSettings()">Logout</button>
+            </li> -->
           </ul>
-        </div> -->
+        </div>
       </nav>
     </div>
   </header>
@@ -36,7 +53,24 @@
 
 <script setup lang="ts">
 import { useUserStore } from "../../store/user"
+import Dashboard from "../icons/Dashboard.vue"
+
 const config = useRuntimeConfig()
+const { $api, $auth } = useNuxtApp()
+const userStore = useUserStore()
+
+const signInTest = () =>
+  $api()
+    .user.signIn({
+      username: "evai",
+      password: "evai",
+    })
+    .then(async (data) => {
+      const { user } = await $auth.auth(data.jwt)
+      console.log("user", user)
+      useUserStore().setUserSettings(user)
+    })
+    .catch((e) => console.log("e", e))
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +93,13 @@ const config = useRuntimeConfig()
   top: 0;
   width: 100%;
   z-index: 25;
+
+  @include mobile {
+    top: auto;
+    bottom: 0;
+    border-top: 2px solid var(--color-border);
+    border-bottom: 0px solid var(--color-border);
+  }
 }
 .header-content {
   height: 100%;
@@ -87,6 +128,10 @@ const config = useRuntimeConfig()
         display: flex;
         gap: 50px;
 
+        .icon {
+          display: none;
+        }
+
         li a {
           text-decoration: none;
           color: var(--color-header);
@@ -99,6 +144,10 @@ const config = useRuntimeConfig()
           justify-content: center;
           text-align: center;
         }
+
+        @include mobile {
+          justify-content: space-evenly;
+        }
       }
 
       &__logo {
@@ -106,12 +155,30 @@ const config = useRuntimeConfig()
         height: 30px;
       }
 
-      // &__item {
-      // }
+      &__item {
+        &.mobile {
+          display: none;
+
+          flex-direction: column;
+          align-items: center;
+          font-size: 0.9rem;
+        }
+
+        @include mobile {
+          display: none;
+          &.mobile {
+            display: flex;
+          }
+          justify-content: space-evenly;
+        }
+      }
     }
   }
 
   &__second {
+    @include mobile {
+      display: none;
+    }
     .second {
       &__list {
         list-style: none;
@@ -137,6 +204,18 @@ const config = useRuntimeConfig()
         border-radius: 5px;
 
         color: var(--color-header);
+
+        &.mobile {
+          display: none;
+        }
+
+        @include mobile {
+          display: none;
+
+          &.mobile {
+            display: flex;
+          }
+        }
       }
 
       &__logout {

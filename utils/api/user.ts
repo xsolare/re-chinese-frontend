@@ -26,15 +26,16 @@ export const UserApi = (instance: AxiosInstance) => ({
   },
 
   async signIn(payload: IUserPayload): Promise<IUserJwt> {
-    const { data } = await instance.put<IApiUser>("/user/sign-in", {
-      body: payload,
+    const { data } = await instance.post<IApiUser>("/user/sign-in", {
+      password: payload.password,
+      username: payload.username,
     })
 
     return data.data as IUserJwt
   },
 
   async signUp(payload: IUserPayload): Promise<IUserJwt> {
-    const { data } = await instance.put<IApiUser>("/user/sign-up", {
+    const { data } = await instance.post<IApiUser>("/user/sign-up", {
       body: payload,
     })
 

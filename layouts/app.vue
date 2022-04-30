@@ -19,5 +19,9 @@
   // min-height: calc(100vh - var(--footer-height));
   min-height: 100vh;
   height: 100%;
+
+  @include mobile {
+    padding-top: 0;
+  }
 }
 </style>
