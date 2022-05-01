@@ -21,7 +21,7 @@
             v-if="pinyin?.id"
             @mouseover="handleOverPinyin(pinyin)"
             @mouseleave="handleLeavePinyin(pinyin)"
-            @click="handleClickPinyin(pinyin)"
+            @click.stop="handleClickPinyin(pinyin)"
             :style="{ gridRow: initial.pos + 1 }"
             class="pinyin-row">
             {{ pinyin.pinyin }}
@@ -30,6 +30,28 @@
         </template>
       </template>
     </div>
+    <UiModal :callback="() => (isShowed = false)">
+      <div class="pinyin-menu" v-if="isShowed">
+        <div class="pinyin-menu__content">
+          <div class="pinyin-menu-header">
+            <span>{{ pinyinStore.initials.find((x) => x.id === selectedPinyin.initialId).name }}</span>
+            <span> + </span>
+            <span>{{ pinyinStore.finals.find((x) => x.id === selectedPinyin.finalId).name }}</span>
+          </div>
+          <div class="pinyin-menu-tones">
+            <button
+              v-for="pinyinTone in pinyinStore.pinyin.filter(
+                (x) => x.finalId === selectedPinyin.finalId && x.initialId === selectedPinyin.initialId,
+              )"
+              :key="pinyinTone.id"
+              @click.stop="handleClickTonePinyin(pinyinTone)"
+              class="pinyin-menu-tones__button">
+              {{ pinyinTone.pinyin }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </UiModal>
   </div>
 </template>
 
@@ -48,6 +70,8 @@ if (pinyinStore.loadStatus === ApiStatus.NONE || pinyinStore.loadStatus === ApiS
 // }
 
 const hoverPinyin = ref({} as IPinyin)
+const selectedPinyin = ref({} as IPinyin)
+const isShowed = ref(false)
 
 const resetHoverPinyin = (pinyin: IPinyin) => {
   if (pinyin.id === hoverPinyin.value.id) hoverPinyin.value = {} as IPinyin
@@ -55,6 +79,11 @@ const resetHoverPinyin = (pinyin: IPinyin) => {
 const handleLeavePinyin = debounce(resetHoverPinyin, 100)
 const handleOverPinyin = (pinyin: IPinyin) => (hoverPinyin.value = pinyin)
 const handleClickPinyin = (pinyin: IPinyin) => {
+  selectedPinyin.value = pinyin
+  isShowed.value = true
+}
+const handleClickTonePinyin = (pinyin: IPinyin) => {
+  isShowed.value = false
   if (props?.callback) props.callback(pinyin)
 }
 
@@ -109,9 +138,10 @@ const props = defineProps({
 }
 .pinyin {
   padding: 5px;
-  max-width: 1800px;
+
   width: 100%;
   height: 100%;
+
   margin: 0px auto;
 
   display: flex;
@@ -119,6 +149,7 @@ const props = defineProps({
   flex-direction: column;
 }
 .pinyin-container {
+  max-width: 1800px;
   border-radius: 10px;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -131,7 +162,6 @@ const props = defineProps({
   background-color: var(--color-border);
   border: 1px solid var(--color-border);
 }
-
 .pinyin-row {
   background-color: var(--color-background-content);
   display: flex;
@@ -185,6 +215,48 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+.pinyin-menu {
+  &__content {
+    color: var(--color-text-invert);
+    padding: 15px;
+
+    font-size: 1rem;
+    background-color: var(--color-background-modal);
+    width: 320px;
+    max-height: 500px;
+    height: 100%;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+.pinyin-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  color: var(--color-text-invert);
+  font-size: 2rem;
+  border-bottom: 2px solid var(--color-border);
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+.pinyin-menu-tones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  &__button {
+    color: var(--color-text-invert);
+    font-size: 1.3rem;
+    background-color: var(--color-background-modal-content);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 5px 10px;
   }
 }
 </style>

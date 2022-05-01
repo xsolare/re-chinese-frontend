@@ -63,7 +63,7 @@ const signInTest = () =>
   $api()
     .user.signIn({
       username: "evai",
-      password: "evai",
+      password: "123321",
     })
     .then(async (data) => {
       const { user } = await $auth.auth(data.jwt)

@@ -1,12 +1,21 @@
 <template>
   <teleport to="body">
-    <transition class="modal" name="modal">
+    <transition @click.stop="callback" class="modal" name="modal">
       <slot />
     </transition>
   </teleport>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { PropType } from "vue"
+
+defineProps({
+  callback: {
+    type: Function as PropType<() => void>,
+    required: false,
+  },
+})
+</script>
 
 <style scoped lang="scss">
 .modal {

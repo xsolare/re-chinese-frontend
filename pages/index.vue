@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <NuxtLink to="/pinyin">Пиньинь</NuxtLink>
-    <NuxtLink to="/words">Слова</NuxtLink>
-    <NuxtLink to="/">. . . . .</NuxtLink>
-    <NuxtLink to="/notebook">Учебник</NuxtLink>
+    <WordsTypesMatch />
   </div>
 </template>
 
@@ -26,7 +23,7 @@
     text-decoration: none;
     color: var(--color-text);
 
-    background-color: var(--color-background-content);
+    background-color: var(--color-background);
     padding: 5px 20px;
     border-radius: 10px;
 

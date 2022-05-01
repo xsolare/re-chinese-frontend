@@ -5,7 +5,7 @@
       {{ value?.pinyin ? value.pinyin : "Select" }}
     </button>
   </div>
-  <UiModal>
+  <UiModal :callback="() => (isShowed = false)">
     <PinyinTable v-if="isShowed" :callback="callback" />
   </UiModal>
 </template>

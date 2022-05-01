@@ -42,8 +42,8 @@ const pinyin: Ref<IPinyin | null> = ref(null)
 const hieroglyph: Ref<string> = ref("")
 const hsk: Ref<IRangeHsk> = ref(hskSlider[0])
 
-const pinyinErrors = ref([])
-const hieroglyphErrors = ref([])
+const pinyinErrors: Ref<string[]> = ref([])
+const hieroglyphErrors: Ref<string[]> = ref([])
 
 const handleClickPinyin = (value: IPinyin) => (pinyin.value = value)
 const handleClickHsk = (value: IRangeHsk) => (hsk.value = value)
@@ -105,6 +105,7 @@ definePageMeta({
 .hieroglyph-add-fields {
   // background-color: var(--color-background-content);
   // box-shadow: 0 0 4px var(--color-border);
+
   display: flex;
   align-items: center;
   justify-content: center;

@@ -5,15 +5,13 @@
         :word="wordsStore.currentWord.word"
         :is-pinyi="wordsStore.isPinyi"
         :is-answered="wordsStore.isAnswered"
-        :mode="'zh'"
-      />
+        :mode="'zh'" />
     </div>
     <div class="qa__control control-content">
       <button
         v-if="!wordsStore.isAnswered"
         @click="() => wordsStore.$patch({ isAnswered: !wordsStore.isAnswered })"
-        class="control-content__show"
-      >
+        class="control-content__show">
         Проверить
       </button>
       <template v-else>
@@ -24,8 +22,7 @@
               wordsStore.nextWord()
             }
           "
-          class="control-content__submit control-content__submit_no"
-        >
+          class="control-content__submit control-content__submit_no">
           Нет
         </button>
         <button
@@ -35,8 +32,7 @@
               wordsStore.nextWord()
             }
           "
-          class="control-content__submit control-content__submit_yes"
-        >
+          class="control-content__submit control-content__submit_yes">
           Да
         </button>
       </template>
@@ -45,12 +41,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore } from '../../../store'
+import { useWordsStore } from "../../../store"
 
 const wordsStore = useWordsStore()
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .qa {
   display: flex;
   flex-direction: column;

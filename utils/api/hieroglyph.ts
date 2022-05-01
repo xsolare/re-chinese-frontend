@@ -11,7 +11,7 @@ interface IApiHieroglyph extends IApiResponse {
 export const HieroglyphApi = (instance: AxiosInstance) => ({
   async getByHieroglyph(hieroglyph: string) {
     const { data } = await instance.get<IApiHieroglyph>("/hieroglyph/name/" + hieroglyph, {})
-    return data.data as IHieroglyph[]
+    return data.data as IHieroglyph
   },
 
   async getByPinyin(pinyin: number) {

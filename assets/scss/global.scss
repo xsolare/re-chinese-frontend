@@ -1,6 +1,9 @@
 :root {
   --color-text: #262728;
   --color-sub-text: #535353;
+  --color-text-invert: #e4e4e4;
+  --color-sub-text-invert: #6d6e6f;
+
   --color-header: #e0e0e0;
   --color-header-bg: #111111;
   --color-header-content-bg: #a5a5a5;
@@ -15,7 +18,8 @@
   --color-background-content: #e4e4e4;
   --color-background-highlight: darken(#{$color-background-content}, 5%);
   --color-background-modal: #333;
-  --color-background-modal-content: darken(#{$color-background-modal}, 10%);
+  --color-background-modal-content: #444;
+  // --color-background-modal-content: darken(#{$color-background-modal}, 15%);
 
   // Auth
   --color-auth: #e4e4e4;

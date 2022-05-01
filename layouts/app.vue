@@ -22,6 +22,7 @@
 
   @include mobile {
     padding-top: 0;
+    padding-bottom: var(--header-height);
   }
 }
 </style>
