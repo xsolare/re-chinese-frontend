@@ -7,7 +7,8 @@
         </NuxtLink> -->
       </div>
       <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Collection</NuxtLink>
-      <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink>
+      <!-- <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink> -->
+      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">Keys</NuxtLink>
       <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
         <!-- <NuxtLink to="/hieroglyph/add">
           <IconsAdd />

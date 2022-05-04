@@ -1,9 +1,9 @@
 import { IHieroglyphPostAPI, IApiResponse } from "#/types/api"
-import { IHieroglyph } from "#/types/store/hieroglyph"
+import { IHieroglyph, IHieroglyphKey } from "#/types/store/hieroglyph"
 import { AxiosInstance } from "axios"
 
 interface IApiHieroglyph extends IApiResponse {
-  data: IHieroglyph | IHieroglyph[]
+  data: IHieroglyph | IHieroglyph[] | IHieroglyphKey[]
 }
 
 ///                                                                                 //
@@ -29,5 +29,10 @@ export const HieroglyphApi = (instance: AxiosInstance) => ({
   async deleteById(id: number) {
     const { data } = await instance.delete<IApiHieroglyph>("/hieroglyph/" + id, {})
     return data.data as IHieroglyph
+  },
+
+  async keys() {
+    const { data } = await instance.get<IApiHieroglyph>("/hieroglyph/keys")
+    return data.data as IHieroglyphKey[]
   },
 })

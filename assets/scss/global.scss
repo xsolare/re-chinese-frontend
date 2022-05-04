@@ -12,6 +12,7 @@
   --color-footer: #8b8c8d;
   --color-footer-hover: #6db6ff;
   --color-highlight: #{$color-highlight};
+  --color-highlight-hover: #bed8f2;
   --color-shadow-highlight: rgb(167, 167, 167);
 
   --color-background: #eeeeee;
@@ -247,3 +248,13 @@ body {
 //     font-size: #{$font-size-large};
 //   }
 // }
+
+.item-transition-enter-active,
+.item-transition-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.item-transition-enter-from,
+.item-transition-leave-to {
+  opacity: 0;
+}

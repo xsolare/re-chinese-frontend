@@ -1,48 +1,48 @@
 <template>
-  <!-- <NuxtLayout name="word"> -->
-  <form @submit.prevent="handleCheckForm" class="word-add">
-    <div class="word-add-main">
-      <div class="word-add-content">
-        <div class="word-add-item">
-          <div class="word-add-title">
-            <div v-if="!hieroglyphicAccepted.length" class="word-add-title__item">
-              <span class="word-add-title__pinyin"></span>
-              <h2 class="word-add-title__hieroglyph">?</h2>
-            </div>
+  <NuxtLayout name="word">
+    <form @submit.prevent="handleCheckForm" class="word-add">
+      <div class="word-add-main">
+        <div class="word-add-content">
+          <div class="word-add-item">
+            <div class="word-add-title">
+              <div v-if="!hieroglyphicAccepted.length" class="word-add-title__item">
+                <span class="word-add-title__pinyin"></span>
+                <h2 class="word-add-title__hieroglyph">?</h2>
+              </div>
 
-            <div v-else v-for="ha in hieroglyphicAccepted" :key="ha.id" class="word-add-title__item">
-              <span class="word-add-title__pinyin">
-                {{ pinyinStore.pinyin.find((x) => x.id === ha.pinyinId).pinyin }}</span
-              >
-              <h2 class="word-add-title__hieroglyph">
-                {{ ha.hieroglyph }}
-              </h2>
+              <div v-else v-for="ha in hieroglyphicAccepted" :key="ha.id" class="word-add-title__item">
+                <span class="word-add-title__pinyin">
+                  {{ pinyinStore.pinyin.find((x) => x.id === ha.pinyinId).pinyin }}</span
+                >
+                <h2 class="word-add-title__hieroglyph">
+                  {{ ha.hieroglyph }}
+                </h2>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="word-add-item">
-          <UiInput v-model:input.trim="hieroglyphic">Hieroglyphic</UiInput>
-        </div>
-        <div class="word-add-item">
-          <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
-        </div>
-        <div class="word-add-item">
-          <div class="word-add-item__errors">
-            <TransitionGroup class="errors" name="errors">
-              <span v-for="he in hieroglyphicErrors" :key="he">{{ he }}</span>
-            </TransitionGroup>
+          <div class="word-add-item">
+            <UiInput v-model:input.trim="hieroglyphic">Hieroglyphic</UiInput>
           </div>
-        </div>
-        <div class="word-add-item">
-          <!-- <div class="word-add-item__submit" :class="{ isDisabled: !word || !pinyin }"> -->
-          <div class="word-add-item__submit">
-            <button>Submit</button>
+          <div class="word-add-item">
+            <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
+          </div>
+          <div class="word-add-item">
+            <div class="word-add-item__errors">
+              <TransitionGroup class="errors" name="errors">
+                <span v-for="he in hieroglyphicErrors" :key="he">{{ he }}</span>
+              </TransitionGroup>
+            </div>
+          </div>
+          <div class="word-add-item">
+            <!-- <div class="word-add-item__submit" :class="{ isDisabled: !word || !pinyin }"> -->
+            <div class="word-add-item__submit">
+              <button>Submit</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
-  <!-- </NuxtLayout> -->
+    </form>
+  </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
@@ -83,7 +83,29 @@ const handleChangeValue = debounce((str: string) => {
     })
   }
 }, 400)
-const handleCheckForm = () => {}
+const handleCheckForm = async () => {
+  let isErrors = 0
+
+  if (!hieroglyphicAccepted.value.length) {
+    hieroglyphicErrors.value.push("Hieroglyphic is empty")
+    isErrors += 1
+  }
+
+  if (!isErrors) {
+    try {
+      const newWord = await $api().word.add({
+        name: hieroglyphicAccepted.value.map((x) => x.hieroglyph).join(""),
+        pinyin: hieroglyphicAccepted.value
+          .map((x) => pinyinStore.pinyin.find((y) => y.id === x.pinyinId).pinyin)
+          .join(" "),
+        hsk: +hsk.value.value,
+      })
+      useRouter().push("/word/edit/" + newWord.id)
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+}
 
 watchEffect(() => {
   hieroglyphic.value

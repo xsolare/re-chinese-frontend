@@ -1,43 +1,46 @@
 <template>
-  <div class="translate">
-    <div class="translate__title">
-      <div />
-      <h2>Translates</h2>
-    </div>
-    <div class="translate__type">
-      <UiSlider :range="languagesSlider" :current="currentLanguage" :callback="handleClickLanguage" />
-    </div>
-    <div class="translate__list">
-      <div
-        class="translate__item"
-        v-for="(translate, index) in translates.sort((a, b) => a.priority - b.priority)"
-        :key="translate.id">
-        <span>{{ index }}</span>
-        <p>{{ translate.translate }}</p>
-        <div class="priority">
-          <div class="priority__bar" />
-          <div class="priority__fill" />
-          <!-- <div class="priority__value" /> -->
-        </div>
-      </div>
+  <div class="translate-content">
+    <HieroglyphPartOfSpeech :currentPartOfSpeech="partOfSpeech" :callback="handlePartOfSpeech" />
 
-      <div v-if="!isCreatingTranslate" class="translate__control control-content">
-        <div class="control-content__button">
-          <button @click.prevent="isCreatingTranslate = true" class="control-content__add">Add</button>
-        </div>
+    <div class="translate">
+      <div class="translate__title">
+        <div />
+        <h2>Translates</h2>
       </div>
+      <div class="translate__type">
+        <UiSlider :range="languagesSlider" :current="language" :callback="handleClickLanguage" />
+      </div>
+      <div class="translate__list">
+        <TransitionGroup name="item-transition">
+          <div
+            class="translate__item"
+            v-for="(translate, index) in translates.sort((a, b) => a.priority - b.priority)"
+            :key="translate.id">
+            <span>{{ index }}</span>
+            <p>{{ translate.translate }}</p>
+            <div class="priority">
+              <div class="priority__bar" />
+              <div class="priority__fill" />
+              <!-- <div class="priority__value" /> -->
+            </div>
+          </div>
+        </TransitionGroup>
 
-      <div v-else class="translate__control control-content">
-        <!-- <div class="control-content__button">
-          <button @click.prevent class="control-content__add">Add</button>
-        </div> -->
-        <div class="control-content__item">
-          <textarea placeholder="translate" />
-          <input placeholder="1 - 100" maxlength="3" />
+        <div v-if="!isCreatingTranslate" class="translate__control control-content">
+          <div class="control-content__button">
+            <button @click.prevent="isCreatingTranslate = true" class="control-content__add">Add</button>
+          </div>
         </div>
-        <div class="control-content__button">
-          <button @click.prevent class="control-content__send">Send</button>
-          <button @click.prevent="isCreatingTranslate = false" class="control-content__cancel">Cancel</button>
+
+        <div v-else class="translate__control control-content">
+          <div class="control-content__item">
+            <textarea placeholder="translate" />
+            <input placeholder="1 - 100" maxlength="3" />
+          </div>
+          <div class="control-content__button">
+            <button @click.prevent="handleClickSend" class="control-content__send">Send</button>
+            <button @click.prevent="isCreatingTranslate = false" class="control-content__cancel">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
@@ -46,40 +49,38 @@
 
 <script lang="ts" setup>
 import { IRangeLanguage, languagesSlider } from "#/types"
+import { IWord, IWordTranslate } from "#/types/store"
 import { PropType, Ref } from "vue"
 
-const currentLanguage: Ref<IRangeLanguage> = ref(languagesSlider[0])
-const handleClickLanguage = (value: IRangeLanguage) => (currentLanguage.value = value)
+//                                                                      //
+
+const { $api } = useNuxtApp()
 
 const isCreatingTranslate: Ref<Boolean> = ref(false)
+const partOfSpeech: Ref<number> = ref(1)
+const language: Ref<IRangeLanguage> = ref(languagesSlider[0])
+const translates: Ref<IWordTranslate[]> = ref([])
 
-const translates = ref([
-  {
-    id: 1,
-    priority: 10,
-    translate: "Буквы",
-    language_id: 1,
-    hieroglyph_id: 2,
-  },
-  {
-    id: 2,
-    priority: 15,
-    translate: "Буквы",
-    language_id: 1,
-    hieroglyph_id: 2,
-  },
-])
+const handleClickLanguage = (value: IRangeLanguage) => (language.value = value)
+const handlePartOfSpeech = (id: number) => (partOfSpeech.value = id)
+const handleClickSend = async () => {
+  // const newTranslate = await $api().word.addTranslate()
+}
 
-// defineProps({
-//   currentPartOfSpeech: {
-//     type: Number,
-//     required: true,
-//   },
-//   callback: {
-//     type: Function as PropType<(id: number) => void>,
-//     required: true,
-//   },
-// })
+watchEffect(async () => {
+  partOfSpeech.value
+  language.value
+
+  translates.value = []
+  translates.value = await $api().word.getTranslateById(props.word.id, language.value.id, partOfSpeech.value)
+})
+
+const props = defineProps({
+  word: {
+    type: Object as PropType<IWord>,
+    required: true,
+  },
+})
 </script>
 
 <style lang="scss" scoped>
@@ -130,6 +131,7 @@ const translates = ref([
   &__item {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     position: relative;
     background-color: var(--color-background-content);

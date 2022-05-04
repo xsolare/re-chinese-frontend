@@ -53,10 +53,16 @@ defineProps({
     // border: 1px solid var(--color-border);
     // margin: 0;
 
+    > :hover {
+      border-radius: 15px;
+      background-color: var(--color-highlight-hover);
+    }
+
     div {
       height: 30px;
       // background: var(--color-button-bg);
       background-color: var(--color-highlight);
+      user-select: none;
 
       position: absolute;
       left: 0;

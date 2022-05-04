@@ -1,4 +1,5 @@
 import { ApiStatus } from ".."
+import { IHieroglyph } from "./hieroglyph"
 
 //* State
 export interface WordsState {
@@ -24,11 +25,18 @@ export interface IWordSetting {
 
 export interface IWord {
   id: number
-  original: string
+  name: string
   pinyin: string
-  translate: string
   hsk: number
-  partOfSpeechId: string
+  hieroglyphic?: IHieroglyph[]
+  translate?: IWordTranslate[]
+}
+
+export interface IWordTranslate {
+  id: number
+  translate: string
+  priority: number
+  description: string
 }
 
 export interface ICurrentWord {

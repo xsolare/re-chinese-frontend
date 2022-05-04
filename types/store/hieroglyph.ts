@@ -15,3 +15,12 @@ export interface IHieroglyph {
   hsk: number
   pinyinId: number
 }
+
+export interface IHieroglyphKey {
+  id: number
+  index: number
+  pinyin: string
+  hieroglyph: string
+  priority: number
+  alternativeHieroglyph: string
+}

@@ -14,12 +14,6 @@
           <div class="hieroglyph-edit-item">
             <HieroglyphHsk :currentHsk="currentHsk" :callback="handleClickHsk" />
           </div>
-          <div class="hieroglyph-edit-item">
-            <HieroglyphPartOfSpeech :currentPartOfSpeech="currentPartOfSpeech" :callback="handlePartOfSpeech" />
-          </div>
-          <div class="hieroglyph-edit-item">
-            <HieroglyphTranslate />
-          </div>
         </div>
       </div>
     </form>
@@ -29,6 +23,8 @@
 <script lang="ts" setup>
 import { IRangeHsk, hskSlider } from "#/types"
 import { Ref } from "vue"
+
+//                                                                      //
 
 const currentHsk: Ref<IRangeHsk> = ref(hskSlider[0])
 const currentPartOfSpeech = ref(1)
