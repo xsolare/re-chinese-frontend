@@ -22,6 +22,15 @@ watchEffect(() => {
   isShowed.value = false
 })
 
+useRouter().beforeEach((to, from) => {
+  if (isShowed.value) {
+    isShowed.value = false
+    return false
+  }
+
+  return true
+})
+
 const props = defineProps({
   value: {
     type: Object as PropType<IPinyin>,

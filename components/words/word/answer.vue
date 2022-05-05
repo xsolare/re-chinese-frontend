@@ -4,7 +4,7 @@
       <!-- <span v-show="isPinyi">{{ word.pinyin }}</span> -->
       <p v-show="isPinyi">{{ word.pinyin }}</p>
     </div>
-    <span class="word-answer__text">{{ word.original }}</span>
+    <span class="word-answer__text">{{ word.hieroglyphic }}</span>
     <div class="word-answer__tr">
       <p v-if="isAnswered">{{ word.translate }}</p>
     </div>
@@ -16,14 +16,14 @@
     </div>
     <span class="word-answer__text">{{ word.translate }}</span>
     <div class="word-answer__tr">
-      <p v-if="isAnswered">{{ word.original }}</p>
+      <p v-if="isAnswered">{{ word.hieroglyphic }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
-import { IWord } from '../../../types/store/words'
+import { PropType } from "vue"
+import { IWord } from "../../../types/store/words"
 
 const selected = ref(false)
 
@@ -45,7 +45,7 @@ defineProps({
     required: true,
   },
   mode: {
-    type: String as PropType<'zh' | 'tr'>,
+    type: String as PropType<"zh" | "tr">,
     required: true,
   },
 })

@@ -1,15 +1,21 @@
 <template>
   <NuxtLayout name="hieroglyph">
     <div class="hieroglyph-keys-control">
-      <div class="hieroglyph-keys-control__item" :class="{ isActive: hieroglyphKeyStore.isPinyinShowed }">
-        <button @click="hieroglyphKeyStore.toggleShowPinyin()" class="hieroglyph-keys-control__button">
-          Show pinyin
+      <div
+        @click="hieroglyphKeyStore.toggleShowPinyin()"
+        class="hieroglyph-keys-control__item"
+        :class="{ isActive: hieroglyphKeyStore.isPinyinShowed }">
+        <button class="hieroglyph-keys-control__button">
+          {{ hieroglyphKeyStore.isPinyinShowed ? "Скрыть пиньин" : "Показать пиньин" }}
         </button>
         <IconsSelected class="hieroglyph-keys-control__selected" />
       </div>
-      <div class="hieroglyph-keys-control__item" :class="{ isActive: hieroglyphKeyStore.isTranslateShowed }">
-        <button @click="hieroglyphKeyStore.toggleShowHieroglyph()" class="hieroglyph-keys-control__button">
-          Show translate
+      <div
+        @click="hieroglyphKeyStore.toggleShowHieroglyph()"
+        class="hieroglyph-keys-control__item"
+        :class="{ isActive: hieroglyphKeyStore.isTranslateShowed }">
+        <button class="hieroglyph-keys-control__button">
+          {{ hieroglyphKeyStore.isTranslateShowed ? "Скрыть перевод" : "Показать перевод" }}
         </button>
         <IconsSelected class="hieroglyph-keys-control__selected" />
       </div>
@@ -20,18 +26,16 @@
   </NuxtLayout>
 </template>
 
-<script lang="ts" setup>
-import { useHieroglyphKey } from "#/store"
-import { ApiStatus } from "#/types"
-import { Ref } from "vue"
+<script setup>
+import { useHieroglyphKeyStore, usePinyinStore } from "#/store"
 
 //                                                                      //
 
-const hieroglyphKeyStore = useHieroglyphKey()
+const hieroglyphKeyStore = useHieroglyphKeyStore()
+const pinyinStore = usePinyinStore()
 
-if (hieroglyphKeyStore.loadStatus === ApiStatus.NONE || hieroglyphKeyStore.loadStatus === ApiStatus.REJECTED) {
-  await hieroglyphKeyStore.load()
-}
+await pinyinStore.init()
+await hieroglyphKeyStore.init()
 
 definePageMeta({
   layout: "app",
@@ -55,6 +59,9 @@ definePageMeta({
     padding: 5px 10px;
     border-radius: 10px;
     color: var(--color-text);
+    min-width: 160px;
+    font-size: 0.9rem;
+    text-align: center;
     cursor: pointer;
 
     &.isActive {

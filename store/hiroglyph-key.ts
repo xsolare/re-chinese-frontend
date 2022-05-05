@@ -1,64 +1,37 @@
 import { defineStore } from "pinia"
 import { ApiStatus } from "../types"
-import { ICurrentWord, IWord, IWordSetting, WordsState } from "types/store"
+import { HieroglyphKeyState, ICurrentWord, IWord, IWordSetting, WordsState } from "types/store"
 import { useProgressTaskStore } from "./progress-task"
 
 //* =======================================================================================
 //* Hieroglyph key store
 //* =======================================================================================
 
-export const useHieroglyphKey = defineStore("hieroglyphKeys", {
-  state: () => ({
-    loadStatus: ApiStatus.NONE,
+export const useHieroglyphKeyStore = defineStore("hieroglyphKeys", {
+  state: () =>
+    ({
+      loadStatus: ApiStatus.NONE,
 
-    hieroglyphicKeys: [
-      {
-        id: 1,
-        pinyin: "ren",
-        index: 1,
-        priority: 100,
-        alternativeHieroglyph: "乀, 乁",
-        hieroglyph: "丿",
-      },
-      {
-        id: 2,
-        pinyin: "ren",
-        index: 1,
-        priority: 100,
-        alternativeHieroglyph: "乀, 乁",
-        hieroglyph: "丿",
-      },
-      {
-        id: 3,
-        pinyin: "ren",
-        index: 1,
-        priority: 100,
-        alternativeHieroglyph: "乀, 乁",
-        hieroglyph: "丿",
-      },
-      {
-        id: 4,
-        pinyin: "ren",
-        index: 1,
-        priority: 100,
-        alternativeHieroglyph: "乀, 乁",
-        hieroglyph: "丿",
-      },
-    ],
+      hieroglyphicKeys: [],
 
-    isPinyinShowed: Boolean(useCookie("is-pinyin-showed").value),
-    isTranslateShowed: Boolean(useCookie("is-translate-showed").value),
+      isPinyinShowed: Boolean(useCookie("is-pinyin-showed").value),
+      isTranslateShowed: Boolean(useCookie("is-translate-showed").value),
 
-    errors: [],
-  }),
+      errors: [],
+    } as HieroglyphKeyState),
   getters: {},
   actions: {
+    async init() {
+      if (this.loadStatus === ApiStatus.NONE || this.loadStatus === ApiStatus.REJECTED) {
+        await useHieroglyphKeyStore().load()
+      }
+    },
     async load() {
       const { $api } = useNuxtApp()
       this.loadStatus = ApiStatus.PENDING
 
       try {
-        const keys = $api().hieroglyph.keys()
+        const keys = await $api().hieroglyph.keys()
         this.loadStatus = ApiStatus.FULFILLED
 
         this.hieroglyphicKeys = keys

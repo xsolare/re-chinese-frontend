@@ -1,5 +1,3 @@
-import { defineNuxtPlugin } from "#app"
-
 import { api } from "#/utils/api"
 
 export default defineNuxtPlugin(() => {

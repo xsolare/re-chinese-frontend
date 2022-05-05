@@ -57,17 +57,13 @@
 
 <script lang="ts" setup>
 import { usePinyinStore } from "#/store"
-import { ApiStatus, IPinyin } from "#/types"
+import { IPinyin } from "#/types"
 import { debounce } from "#/utils"
-import { PropType } from "vue"
+import { PropType, ref } from "vue"
 
 const pinyinStore = usePinyinStore()
 
-// if (process.server) {
-if (pinyinStore.loadStatus === ApiStatus.NONE || pinyinStore.loadStatus === ApiStatus.REJECTED) {
-  await pinyinStore.load()
-}
-// }
+await pinyinStore.init()
 
 const hoverPinyin = ref({} as IPinyin)
 const selectedPinyin = ref({} as IPinyin)
@@ -102,6 +98,15 @@ const cullPinyin = (initialPos: number): IPinyin[] => {
 
   return sector
 }
+
+useRouter().beforeEach((to, from) => {
+  if (isShowed.value) {
+    isShowed.value = false
+    return false
+  }
+
+  return true
+})
 
 const props = defineProps({
   callback: {

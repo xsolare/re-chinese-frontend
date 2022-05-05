@@ -1,10 +1,14 @@
 <template>
   <div class="home">
-    <WordsTypesMatch />
+    <h1>yep</h1>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+definePageMeta({
+  layout: "app",
+})
+</script>
 
 <style lang="scss" scoped>
 .home {
@@ -32,3 +36,5 @@
   }
 }
 </style>
+
+function definePageMeta(arg0: { layout: string; }) { throw new Error("Function not implemented."); }

@@ -12,11 +12,11 @@
               <NuxtLink to="/pinyin" class="first__item">Пиньин</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/hieroglyph" class="first__item mobile">
+              <NuxtLink to="/hieroglyph/keys" class="first__item mobile">
                 <IconsDashboard />
                 <span>Иероглифы</span>
               </NuxtLink>
-              <NuxtLink to="/hieroglyph" class="first__item">Иероглифы</NuxtLink>
+              <NuxtLink to="/hieroglyph/keys" class="first__item">Иероглифы</NuxtLink>
             </li>
             <li>
               <NuxtLink to="/word" class="first__item mobile">
@@ -37,13 +37,19 @@
         <div class="header-nav__second second">
           <ul class="second__list">
             <li v-if="!useUserStore().isLoggedIn">
-              <!-- <div class="second__signin mobile" :href="config.API_URL + '/signin'">S</div> -->
               <div class="second__signin" @click="signInTest">Sign In</div>
+              <div class="second__signin mobile" @click="signInTest">
+                <IconsDashboard />
+                <span>Профиль</span>
+              </div>
             </li>
-            <!-- <li v-else>
-              <span class="second__is-logged">IsLogged as {{ useUserStore().userInfo?.personaname || "" }}</span>
-              <button class="second__logout" @click="useUserStore().removeUserSettings()">Logout</button>
-            </li> -->
+            <li v-else>
+              <div class="second__profile" @click="useUserStore().removeUserSettings()">Профиль</div>
+              <div class="second__profile mobile" @click="signInTest">
+                <IconsDashboard />
+                <span>Профиль</span>
+              </div>
+            </li>
           </ul>
         </div>
       </nav>
@@ -56,7 +62,8 @@ import { useUserStore } from "../../store/user"
 import Dashboard from "../icons/Dashboard.vue"
 
 const config = useRuntimeConfig()
-const { $api, $auth } = useNuxtApp()
+const { $api, $auth, $t } = useNuxtApp()
+
 const userStore = useUserStore()
 
 const signInTest = () =>
@@ -107,7 +114,6 @@ const signInTest = () =>
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .header-nav {
   display: flex;
   flex-direction: row;
@@ -176,9 +182,6 @@ const signInTest = () =>
   }
 
   &__second {
-    @include mobile {
-      display: none;
-    }
     .second {
       &__list {
         list-style: none;
@@ -189,38 +192,60 @@ const signInTest = () =>
       }
 
       &__signin {
-        cursor: pointer;
-        font-weight: 500;
-        color: var(--color-header);
-        text-decoration: none;
+        &:not(.mobile) {
+          cursor: pointer;
+          font-weight: 500;
+          color: var(--color-header);
+          text-decoration: none;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: 60px;
-        height: 30px;
-        background-color: var(--color-highlight);
-        border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 60px;
+          height: 30px;
+          background-color: var(--color-highlight);
+          border-radius: 5px;
 
-        color: var(--color-header);
+          color: var(--color-header);
+          @include mobile {
+            display: none;
+          }
+        }
 
         &.mobile {
           display: none;
-        }
+          flex-direction: column;
+          align-items: center;
+          font-size: 0.9rem;
+          color: var(--color-header);
 
-        @include mobile {
-          display: none;
-
-          &.mobile {
+          @include mobile {
             display: flex;
           }
         }
       }
 
-      &__logout {
-        color: tomato;
-        cursor: pointer;
+      &__profile {
+        &:not(.mobile) {
+          cursor: pointer;
+
+          @include mobile {
+            display: none;
+          }
+        }
+
+        &.mobile {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          font-size: 0.9rem;
+          color: var(--color-header);
+
+          @include mobile {
+            display: flex;
+          }
+        }
       }
     }
   }

@@ -1,10 +1,10 @@
-import { defineNuxtConfig } from "nuxt3"
+import { defineNuxtConfig } from "nuxt"
 
 import { resolve } from "path"
 
 export default defineNuxtConfig({
   //* build modules
-  buildModules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxtjs/color-mode"],
+  buildModules: ["@pinia/nuxt", "@nuxtjs/color-mode"],
 
   //* css
   css: ["@/assets/scss/index.scss"],
@@ -75,4 +75,7 @@ export default defineNuxtConfig({
 
   //* Server-side rendering
   ssr: true,
+
+  //* Build target
+  target: "static",
 })

@@ -3,7 +3,7 @@
     <div class="word-task__pinyin">
       <span v-show="isPinyi || isAnswered">{{ word.pinyin }}</span>
     </div>
-    <span class="word-task__text">{{ word.original }}</span>
+    <span class="word-task__text">{{ word.hieroglyphic }}</span>
     <div class="word-task__tr">
       <span v-if="isAnswered">{{ word.translate }}</span>
     </div>
@@ -15,14 +15,14 @@
     </div>
     <span class="word-task__text">{{ word.translate }}</span>
     <div class="word-task__tr">
-      <span v-if="isAnswered">{{ word.original }}</span>
+      <span v-if="isAnswered">{{ word.hieroglyphic }}</span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
-import { IWord } from '../../../types/store/words'
+import { PropType } from "vue"
+import { IWord } from "../../../types/store/words"
 
 defineProps({
   word: {
@@ -38,7 +38,7 @@ defineProps({
     required: true,
   },
   mode: {
-    type: String as PropType<'zh' | 'tr'>,
+    type: String as PropType<"zh" | "tr">,
     required: true,
   },
 })

@@ -1,5 +1,5 @@
 import { IHieroglyphPostAPI, IApiResponse } from "#/types/api"
-import { IHieroglyph, IHieroglyphKey } from "#/types/store/hieroglyph"
+import { IHieroglyph, IHieroglyphKey } from "#/types/store"
 import { AxiosInstance } from "axios"
 
 interface IApiHieroglyph extends IApiResponse {

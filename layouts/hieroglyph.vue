@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="hieroglyph-layout-menu">
-      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
-        <!-- <NuxtLink to="/hieroglyph/add">
+      <!-- <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
+         <NuxtLink to="/hieroglyph/add">
           <IconsMenu />
-        </NuxtLink> -->
-      </div>
-      <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Collection</NuxtLink>
+        </NuxtLink> 
+      </div>-->
+      <!-- <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Коллекции</NuxtLink> -->
       <!-- <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink> -->
-      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">Keys</NuxtLink>
-      <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
-        <!-- <NuxtLink to="/hieroglyph/add">
+      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">Ключи</NuxtLink>
+      <!-- <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
+         <NuxtLink to="/hieroglyph/add">
           <IconsAdd />
-        </NuxtLink> -->
-      </div>
+        </NuxtLink> 
+      </div>-->
     </div>
     <IconsWave />
     <section class="hieroglyph-layout">

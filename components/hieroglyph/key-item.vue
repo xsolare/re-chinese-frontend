@@ -7,14 +7,17 @@
           :key="hieroglyph.id + '2'"
           v-if="hieroglyphKeyStore.isPinyinShowed || isFullyShowed"
           class="hieroglyph-keys-item__pinyin">
-          {{ hieroglyph.pinyin }}
+          {{ pinyinStore.pinyin.find((x) => x.id === hieroglyph.hieroglyph.pinyinId).pinyin }}
         </div>
-        <div :key="hieroglyph.id + '3'" class="hieroglyph-keys-item__hieroglyph">{{ hieroglyph.hieroglyph }}</div>
+        <div :key="hieroglyph.id + '3'" class="hieroglyph-keys-item__hieroglyph">
+          {{ hieroglyph.hieroglyph.hieroglyph }}
+        </div>
         <div
           :key="hieroglyph.id + '4'"
           v-if="hieroglyphKeyStore.isTranslateShowed || isFullyShowed"
           class="hieroglyph-keys-item__translate">
-          {{ hieroglyph.pinyin }}
+          ggd
+          <!-- {{ hieroglyph.translate[0].translate }} -->
         </div>
       </TransitionGroup>
     </div>
@@ -22,15 +25,22 @@
 </template>
 
 <script lang="ts" setup>
-import { useHieroglyphKey } from "#/store"
+import { useHieroglyphKeyStore, usePinyinStore } from "#/store"
 import { IHieroglyphKey } from "#/types/store"
 import { Ref, PropType } from "vue"
 
 //                                                                      //
 
-const hieroglyphKeyStore = useHieroglyphKey()
+const pinyinStore = usePinyinStore()
+const hieroglyphKeyStore = useHieroglyphKeyStore()
 
 const isFullyShowed: Ref<boolean> = ref(false)
+
+watchEffect(() => {
+  hieroglyphKeyStore.isTranslateShowed
+  hieroglyphKeyStore.isPinyinShowed
+  isFullyShowed.value = false
+})
 
 defineProps({
   hieroglyph: {
@@ -94,6 +104,7 @@ definePageMeta({
 
   &__translate {
     grid-area: translate;
+    text-align: center;
 
     font-size: 0.9rem;
   }

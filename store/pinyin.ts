@@ -20,12 +20,12 @@ export const usePinyinStore = defineStore("pinyin", {
     } as PinyinState),
   getters: {},
   actions: {
+    async init() {
+      if (this.loadStatus === ApiStatus.NONE || this.loadStatus === ApiStatus.REJECTED) {
+        await usePinyinStore().load()
+      }
+    },
     async load() {
-      // const { $api } = useNuxtApp()
-      // this.loadStatus = ApiStatus.PENDING
-      // const pinyin = await $api().pinyin.getFull()
-      // this.pinyin = pinyin
-
       const { $api } = useNuxtApp()
       this.loadStatus = ApiStatus.PENDING
       const p1 = $api().pinyin.getFull()
