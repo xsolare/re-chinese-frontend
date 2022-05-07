@@ -21,8 +21,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
   }
 
-  //? Auto auth
-  // auth()
+  if (process.client) {
+    //? Auto auth
+    // auth()
+  }
 
   return {
     provide: {

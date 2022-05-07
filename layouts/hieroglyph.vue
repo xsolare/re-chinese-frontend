@@ -8,7 +8,7 @@
       </div>-->
       <!-- <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Коллекции</NuxtLink> -->
       <!-- <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink> -->
-      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">Ключи</NuxtLink>
+      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">{{ $t("hieroglyph.keys.title") }}</NuxtLink>
       <!-- <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
          <NuxtLink to="/hieroglyph/add">
           <IconsAdd />
@@ -21,6 +21,10 @@
     </section>
   </div>
 </template>
+
+<script setup>
+const { $t } = useNuxtApp()
+</script>
 
 <style scoped lang="scss">
 .hieroglyph-layout-menu {

@@ -16,8 +16,7 @@
           :key="hieroglyph.id + '4'"
           v-if="hieroglyphKeyStore.isTranslateShowed || isFullyShowed"
           class="hieroglyph-keys-item__translate">
-          ggd
-          <!-- {{ hieroglyph.translate[0].translate }} -->
+          {{ hieroglyph.translate[0].translate }}
         </div>
       </TransitionGroup>
     </div>

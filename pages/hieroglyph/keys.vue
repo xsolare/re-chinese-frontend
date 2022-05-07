@@ -6,7 +6,7 @@
         class="hieroglyph-keys-control__item"
         :class="{ isActive: hieroglyphKeyStore.isPinyinShowed }">
         <button class="hieroglyph-keys-control__button">
-          {{ hieroglyphKeyStore.isPinyinShowed ? "Скрыть пиньин" : "Показать пиньин" }}
+          {{ hieroglyphKeyStore.isPinyinShowed ? $t("hieroglyph.keys.hidePinyin") : $t("hieroglyph.keys.showPinyin") }}
         </button>
         <IconsSelected class="hieroglyph-keys-control__selected" />
       </div>
@@ -15,7 +15,11 @@
         class="hieroglyph-keys-control__item"
         :class="{ isActive: hieroglyphKeyStore.isTranslateShowed }">
         <button class="hieroglyph-keys-control__button">
-          {{ hieroglyphKeyStore.isTranslateShowed ? "Скрыть перевод" : "Показать перевод" }}
+          {{
+            hieroglyphKeyStore.isTranslateShowed
+              ? $t("hieroglyph.keys.hideTranslate")
+              : $t("hieroglyph.keys.showTranslate")
+          }}
         </button>
         <IconsSelected class="hieroglyph-keys-control__selected" />
       </div>
@@ -31,6 +35,7 @@ import { useHieroglyphKeyStore, usePinyinStore } from "#/store"
 
 //                                                                      //
 
+const { $t } = useNuxtApp()
 const hieroglyphKeyStore = useHieroglyphKeyStore()
 const pinyinStore = usePinyinStore()
 
@@ -72,6 +77,7 @@ definePageMeta({
           opacity: 1;
           transform: scale(1);
           transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          fill: var(--color-highlight);
         }
       }
     }
@@ -79,6 +85,7 @@ definePageMeta({
 
   &__button {
     cursor: pointer;
+    color: var(--color-text);
   }
 
   &__selected {

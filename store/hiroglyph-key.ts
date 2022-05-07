@@ -14,8 +14,8 @@ export const useHieroglyphKeyStore = defineStore("hieroglyphKeys", {
 
       hieroglyphicKeys: [],
 
-      isPinyinShowed: Boolean(useCookie("is-pinyin-showed").value),
-      isTranslateShowed: Boolean(useCookie("is-translate-showed").value),
+      isPinyinShowed: Boolean(useCookie("isPinyinShowed").value),
+      isTranslateShowed: Boolean(useCookie("isTranslateShowed").value),
 
       errors: [],
     } as HieroglyphKeyState),
@@ -43,11 +43,11 @@ export const useHieroglyphKeyStore = defineStore("hieroglyphKeys", {
     },
     toggleShowPinyin() {
       this.isPinyinShowed = !this.isPinyinShowed
-      useCookie("is-pinyin-showed").value = this.isPinyinShowed ? "true" : "false"
+      useCookie("isPinyinShowed").value = this.isPinyinShowed ? "true" : "false"
     },
     toggleShowHieroglyph() {
       this.isTranslateShowed = !this.isTranslateShowed
-      useCookie("is-translate-showed").value = this.isTranslateShowed ? "true" : "false"
+      useCookie("isTranslateShowed").value = this.isTranslateShowed ? "true" : "false"
     },
   },
 })

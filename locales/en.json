@@ -1,5 +1,25 @@
 {
   "home": {
-    "meta:title": "Home"
+    "meta:title": "Home",
+    "title": "Home"
+  },
+  "header": {
+    "pinyin": "Pinyin",
+    "hieroglyph": "Hieroglyph",
+    "word": "Words",
+    "profile": "Profile",
+    "menu": {
+      "theme": "Theme",
+      "language": "Language"
+    }
+  },
+  "hieroglyph": {
+    "keys": {
+      "title": "Keys",
+      "showPinyin": "Show pinyin",
+      "hidePinyin": "Hide pinyin",
+      "showTranslate": "Show translate",
+      "hideTranslate": "Hide translate"
+    }
   }
 }

@@ -37,7 +37,7 @@ export default defineNuxtConfig({
 
   //* env
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL || "http://localhost:8080",
+    API_URL: process.env?.API_URL || "http://localhost:8080",
     JWT_HEADER: process.env.JWT_HEADER || "x-token",
   },
 
@@ -76,6 +76,14 @@ export default defineNuxtConfig({
   //* Server-side rendering
   ssr: true,
 
-  //* Build target
-  target: "static",
+  vue: {
+    compilerOptions: {
+      directiveTransforms: {
+        clickOutside: () => ({
+          props: { refs: [], callback: () => {} },
+          needRuntime: false,
+        }),
+      },
+    },
+  },
 })

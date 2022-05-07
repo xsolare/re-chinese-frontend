@@ -1,5 +1,25 @@
 {
   "home": {
-    "meta:title": "Home"
+    "meta:title": "Главная",
+    "title": "Главная"
+  },
+  "header": {
+    "pinyin": "Пиньин",
+    "hieroglyph": "Иероглифы",
+    "word": "Слова",
+    "profile": "Профиль",
+    "menu": {
+      "theme": "Тема",
+      "language": "Язык"
+    }
+  },
+  "hieroglyph": {
+    "keys": {
+      "title": "Ключи",
+      "showPinyin": "Показать пиньин",
+      "hidePinyin": "Скрыть пиньин",
+      "showTranslate": "Показать перевод",
+      "hideTranslate": "Скрыть перевод"
+    }
   }
 }
