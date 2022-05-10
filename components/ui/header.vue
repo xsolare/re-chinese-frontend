@@ -25,17 +25,10 @@
             <NuxtLink to="/word" class="header-nav__item">{{ $t("header.word") }}</NuxtLink>
           </li>
 
-          <!-- <li v-if="!useUserStore().isLoggedIn">
-            <div class="header-nav__item signin" @click="signInTest">Sign In</div>
-            <div class="header-nav__item signin mobile" @click="signInTest">
-              <IconsDashboard />
-              <span>{{ $t("header.profile") }}</span>
-            </div>
-          </li> -->
           <li>
             <div class="header-nav__item profile">
               <div class="menu-profile" :class="{ active: systemStore.isMenuOpen }">
-                <NuxtLink :to="'/' + userStore.userInfo?.username">
+                <NuxtLink :to="'/'">
                   <img
                     class="menu-profile__avatar"
                     :src="userStore.userInfo?.avatar ? userStore.userInfo.avatar : '/duoluo_dalu.jpeg'"
@@ -46,15 +39,21 @@
                 <div @click="systemStore.toggleMenu(!systemStore.isMenuOpen)" class="menu-profile__chevron">
                   <IconsChevron />
                 </div>
-                <Transition name="item-transition">
-                  <HeaderMenu v-if="systemStore.isMenuOpen" />
-                </Transition>
               </div>
             </div>
-            <div class="header-nav__item profile mobile" @click="signInTest">
-              <IconsDashboard />
+            <div
+              class="header-nav__item profile mobile"
+              :class="{ active: systemStore.isMenuOpen }"
+              @click="systemStore.toggleMenu(!systemStore.isMenuOpen)">
+              <IconsAccount />
               <span>{{ $t("header.profile") }}</span>
             </div>
+            <Transition name="item-transition">
+              <template v-if="systemStore.isMenuOpen">
+                <HeaderMenuMobile v-if="useSystemStore().isMobile" />
+                <HeaderMenu v-else />
+              </template>
+            </Transition>
           </li>
         </ul>
       </nav>
@@ -65,26 +64,12 @@
 <script lang="ts" setup>
 import { useSystemStore } from "#/store"
 import { useUserStore } from "../../store/user"
-import Dashboard from "../icons/Dashboard.vue"
 
-const config = useRuntimeConfig()
-const { $api, $auth, $t, $cLoc } = useNuxtApp()
+const env = useRuntimeConfig()
+const { $api, $t, $cLoc } = useNuxtApp()
 
 const userStore = useUserStore()
 const systemStore = useSystemStore()
-
-const signInTest = () =>
-  $api()
-    .user.signIn({
-      username: "evai",
-      password: "123321",
-    })
-    .then(async (data) => {
-      const { user } = await $auth.auth(data.jwt)
-      console.log("user", user)
-      useUserStore().setUserSettings(user)
-    })
-    .catch((e) => console.log("e", e))
 </script>
 
 <style scoped lang="scss">
@@ -109,20 +94,22 @@ const signInTest = () =>
   z-index: 25;
 
   @include mobile {
+    z-index: 25;
     top: auto;
     bottom: 0;
     border-top: 2px solid var(--color-border);
     border-bottom: 0px solid var(--color-border);
+    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
   }
 }
 .header-content {
+  position: relative;
   height: 100%;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 .header-nav {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -142,7 +129,8 @@ const signInTest = () =>
       display: none;
     }
 
-    li a {
+    li a,
+    span {
       text-decoration: none;
       color: var(--color-header);
       font-weight: 500;
@@ -156,8 +144,6 @@ const signInTest = () =>
       height: 100%;
 
       &:last-child {
-        // position: absolute;
-        // right: 0;
         margin-left: auto;
 
         @include mobile {
@@ -167,43 +153,18 @@ const signInTest = () =>
     }
 
     @include mobile {
-      justify-content: space-evenly;
-      padding: 0 10px;
+      justify-content: space-between;
+      gap: 0px;
     }
   }
 
   &__item {
     color: var(--color-header);
-
-    &:not(.mobile).signin {
-      cursor: pointer;
-      font-weight: 500;
-      color: var(--color-header);
-      text-decoration: none;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      width: 60px;
-      height: 30px;
-      background-color: var(--color-highlight);
-      border-radius: 5px;
-
-      color: var(--color-header);
-
-      @include mobile {
-        display: none;
-      }
-    }
+    cursor: pointer;
 
     &:not(.mobile).profile {
       height: 100%;
       cursor: pointer;
-
-      @include mobile {
-        display: none;
-      }
     }
 
     &.mobile {
@@ -211,7 +172,8 @@ const signInTest = () =>
 
       flex-direction: column;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.5rem;
+      min-width: 70px;
     }
 
     @include mobile {
@@ -219,8 +181,16 @@ const signInTest = () =>
       &.mobile {
         display: flex;
       }
+
+      &.active {
+        pointer-events: none;
+      }
       justify-content: space-evenly;
     }
+  }
+
+  @include mobile {
+    padding: 0 20px;
   }
 }
 

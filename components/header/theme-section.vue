@@ -1,35 +1,21 @@
 <template>
   <div @click="active = !active" class="theme">
-    <!-- {currentThemeIcon} -->
-    <div>{{ $t("header.menu.theme") }}</div>
-    <div class="variouse" :class="{ active: active }">
-      <!-- <GiSun onClick={handleClickTheme('light')} /> <IoMdRainy onClick={handleClickTheme('blue')} /> <GiNightSleep
-      onClick={handleClickTheme('dark')} /> -->
-      <div class="variouse__item" @click="handleClickTheme('light')">L</div>
-      <div class="variouse__item" @click="handleClickTheme('dark')">D</div>
-      <div class="variouse__item" @click="handleClickTheme('blue')">B</div>
+    <div class="theme__title">{{ $t("header.menu.theme") }}</div>
+    <div class="theme-variouse" :class="{ active: active }">
+      <div class="variouse__item" @click="colorMode.preference = 'light'">L</div>
+      <div class="variouse__item" @click="colorMode.preference = 'dark'">D</div>
+      <div class="variouse__item" @click="colorMode.preference = 'blue'">B</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useSystemStore } from "#/store/system"
 import { ThemeVarious } from "#/types"
 
 const { $t } = useNuxtApp()
-const colorMode = useColorMode()
 const active = ref(false)
-
-const handleClickTheme = (theme: ThemeVarious) => {
-  colorMode.value = theme
-  localStorage.setItem("nuxt-color-mode", theme)
-}
-
-// Hardcode
-// const themeIcon = new Map<ThemeVarious, any>([
-//   ["light", <div />],
-//   ["dark", <div />],
-//   ["blue", <div />],
-// ])
+const colorMode = useColorMode()
 </script>
 
 <style lang="scss" scoped>
@@ -42,17 +28,16 @@ const handleClickTheme = (theme: ThemeVarious) => {
   width: 100%;
   overflow-x: hidden;
 
-  * {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
 
   :first-child {
     min-width: 24px;
     min-height: 24px;
   }
+  color: var(--color-text-invert);
 }
 
-.variouse {
+.theme-variouse {
   width: 100%;
 
   display: flex;

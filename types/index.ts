@@ -104,5 +104,18 @@ export const languagesSlider = [
   },
 ] as IRangeLanguage[]
 
-export type ThemeVarious = "system" | "light" | "dark" | "blue"
+export type ThemeVarious = "light" | "dark" | "blue"
 export type LanguageVarious = "ru" | "en"
+
+export const ThemeVariousIcons = [
+  {
+    index: 0,
+    value: "RUS",
+    id: 1,
+  },
+  {
+    index: 1,
+    value: "ENG",
+    id: 2,
+  },
+] as IRangeLanguage[]

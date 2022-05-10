@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { IRangeHsk, hskSlider, IPinyin } from "#/types"
-import { matchChineseHieroglyph } from "#/utils"
+import { matchChineseHieroglyph } from "#utils"
 import { Ref } from "vue"
 
 //                                                                      //

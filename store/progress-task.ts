@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { ProgressTask } from 'types/store'
+import { defineStore } from "pinia"
+import { ProgressTask } from "types/store"
 
 //* =======================================================================================
 //* Progress task store
 //* =======================================================================================
 
-export const useProgressTaskStore = defineStore('progressTask', {
+export const useProgressTaskStore = defineStore("progressTask", {
   state: () =>
     ({
       count: 0,

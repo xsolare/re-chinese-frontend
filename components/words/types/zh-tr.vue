@@ -5,8 +5,7 @@
         :word="wordsStore.currentWord.word"
         :is-pinyi="wordsStore.isPinyi"
         :is-answered="wordsStore.isAnswered"
-        :mode="'zh'"
-      />
+        :mode="'zh'" />
     </div>
     <div class="zh-tr__control control-content">
       <div class="control-content__item">
@@ -15,8 +14,7 @@
             :word="wordsStore.currentWord.word"
             :is-pinyi="wordsStore.isPinyi"
             :is-answered="wordsStore.isAnswered"
-            :mode="'tr'"
-          />
+            :mode="'tr'" />
         </template>
       </div>
       <button @click="() => wordsStore.$patch({ isAnswered: !wordsStore.isAnswered })" class="control-content__show">
@@ -27,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore } from '../../../store'
+import { useWordsStore } from "../../../store"
 
 const wordsStore = useWordsStore()
 </script>

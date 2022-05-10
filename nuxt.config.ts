@@ -9,10 +9,7 @@ export default defineNuxtConfig({
   //* css
   css: ["@/assets/scss/index.scss"],
 
-  //* vueuse
-  vueuse: {
-    ssrHandlers: true,
-  },
+  router: {},
 
   //* vite
   vite: {
@@ -35,9 +32,19 @@ export default defineNuxtConfig({
     },
   },
 
+  alias: {
+    "#": resolve(__dirname, "."),
+    "#components": resolve(__dirname, "components"),
+    "#composables": resolve(__dirname, "composables"),
+    "#types": resolve(__dirname, "types"),
+    "#plugins": resolve(__dirname, "plugins"),
+    "#utils": resolve(__dirname, "utils"),
+  },
+
   //* env
   publicRuntimeConfig: {
-    API_URL: process.env?.API_URL || "http://localhost:8080",
+    API_URL: "https://apishka.xyz:8080",
+    // API_URL: process.env.API_URL || "http://localhost:8080",
     JWT_HEADER: process.env.JWT_HEADER || "x-token",
   },
 

@@ -85,7 +85,11 @@ definePageMeta({
     "pinyin"
     "hieroglyph"
     "translate";
-  place-items: center;
+  // place-items: center;
+
+  & {
+    text-align: center;
+  }
 
   overflow: hidden;
 

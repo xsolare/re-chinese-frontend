@@ -7,13 +7,11 @@
             class="progress-content__item"
             :key="task.id"
             v-for="task in progressTaskStore.statusTasks"
-            :class="{ true: task.isCorrect, false: !task.isCorrect }"
-          />
+            :class="{ true: task.isCorrect, false: !task.isCorrect }" />
           <span
             class="progress-content__item"
             :key="empty"
-            v-for="empty in progressTaskStore.count - progressTaskStore.statusTasks.length"
-          />
+            v-for="empty in progressTaskStore.count - progressTaskStore.statusTasks.length" />
         </div>
         <div class="progress-content__complete">
           <span>{{ wordsStore.countCompleted }}</span>
@@ -36,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore, useProgressTaskStore } from '../store'
+import { useWordsStore, useProgressTaskStore } from "../store"
 
 const wordsStore = useWordsStore()
 const progressTaskStore = useProgressTaskStore()
@@ -45,7 +43,7 @@ const router = useRouter()
 
 // console.log('a', progressTaskStore.empty)
 
-const handleClickClose = () => router.push('/')
+const handleClickClose = () => router.push("/")
 
 // TODO global pinyin
 const handleClickPinyin = () => wordsStore.$patch({ isPinyi: !wordsStore.isPinyi })

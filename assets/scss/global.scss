@@ -83,7 +83,7 @@
   --color-background-content: #121314;
   --color-background-highlight: darken(#{$color-background-content-dark}, 5%);
   --color-background-modal: rgb(22, 22, 22);
-  --color-background-modal-content: darken(#{$color-background-modal-dark}, 5%);
+  --color-background-modal-content: rgb(12, 12, 12);
 
   --color-input-bg: #{$color-background-content-dark};
   --color-border: #474747;
@@ -127,7 +127,7 @@
   --color-background-content: #161b22;
   --color-background-highlight: darken(#{$color-background-content-blue}, 5%);
   --color-background-modal: #1b222c;
-  --color-background-modal-content: darken(#{$color-background-modal-blue}, 5%);
+  --color-background-modal-content: #141d27;
 
   --color-input-bg: --color-background-content;
   --color-border: #474747;
@@ -187,7 +187,9 @@ html {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&family=Lato:wght@300;400;700&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap");
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -214,7 +216,8 @@ body {
   padding: 0;
   border: none;
 
-  font-family: "Fredoka", sans-serif;
+  // font-family: "Noto Sans TC", "Rubik", "Fredoka", sans-serif;
+  font-family: "Noto Sans SC", "Rubik", sans-serif;
 }
 
 // Scrollbar color

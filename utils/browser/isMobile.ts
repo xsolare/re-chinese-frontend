@@ -2,7 +2,7 @@ interface IsMobile {
   [key: string]: () => boolean
 }
 
-const agent = typeof navigator !== 'undefined' ? navigator.userAgent : ''
+const agent = typeof navigator !== "undefined" ? navigator.userAgent : ""
 
 const isMobile = {
   android: () => /android/i.test(agent),
@@ -13,9 +13,9 @@ const isMobile = {
   any: () => isMobile.android() || isMobile.blackBerry() || isMobile.iOS() || isMobile.opera() || isMobile.windows(),
   tablet: () =>
     /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i.test(
-      agent
+      agent,
     ),
-  standaloneMode: () => window.matchMedia('(display-mode: standalone)').matches
+  standaloneMode: () => window.matchMedia("(display-mode: standalone)").matches,
 } as IsMobile
 
 export default isMobile

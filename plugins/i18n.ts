@@ -1,8 +1,8 @@
-import get from "lodash-es/get"
+import { get } from "lodash-es"
+
 import * as en from "../locales/en.json"
 import * as ru from "../locales/ru.json"
 
-// TODO Get and save location
 export default defineNuxtPlugin((nuxtApp) => {
   const messages = { en, ru }
   const i18n = {
@@ -22,7 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
       cLoc: changeLocale,
-      loc: i18n.locale,
+      loc: i18n.locale.value,
       t: i18n.t,
     },
   }

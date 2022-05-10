@@ -25,39 +25,39 @@ const tones = reactive([
   {
     id: 1,
     name: "1",
-    isEnable: false
+    isEnable: false,
   },
   {
     id: 2,
     name: "2",
-    isEnable: false
+    isEnable: false,
   },
   {
     id: 3,
     name: "3",
-    isEnable: false
+    isEnable: false,
   },
   {
     id: 4,
     name: "4",
-    isEnable: false
+    isEnable: false,
   },
   {
     id: 5,
     name: "5",
-    isEnable: false
-  }
+    isEnable: false,
+  },
 ])
 
 defineProps({
   currentTone: {
     type: Number,
-    required: true
+    required: true,
   },
   callback: {
     type: Function as PropType<(id: number) => void>,
-    required: true
-  }
+    required: true,
+  },
 })
 </script>
 

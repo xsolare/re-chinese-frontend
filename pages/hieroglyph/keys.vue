@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout name="hieroglyph">
+    <div class="hieroglyph-description" v-html="$t('hieroglyph.keys.description')"></div>
     <div class="hieroglyph-keys-control">
       <div
         @click="hieroglyphKeyStore.toggleShowPinyin()"
@@ -48,6 +49,17 @@ definePageMeta({
 </script>
 
 <style lang="scss" scoped>
+.hieroglyph-description {
+  font-size: 1rem;
+  padding: 5px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include mobile {
+    font-size: 0.9rem;
+  }
+}
+
 .hieroglyph-keys-control {
   display: flex;
   align-items: center;

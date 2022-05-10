@@ -7,6 +7,8 @@
   </div>
 </template>
 
+<script scoped lang="ts"></script>
+
 <style scoped lang="scss">
 .app-layout {
   position: relative;

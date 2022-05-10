@@ -1,8 +1,8 @@
 <template>
   <div @click="active = !active" class="language">
     <!-- {currentThemeIcon} -->
-    <div>{{ $t("header.menu.language") }}</div>
-    <div class="variouse" :class="{ active: active }">
+    <div class="language__title">{{ $t("header.menu.language") }}</div>
+    <div class="language-variouse" :class="{ active: active }">
       <!-- <GiSun onClick={handleClickTheme('light')} /> <IoMdRainy onClick={handleClickTheme('blue')} /> <GiNightSleep
       onClick={handleClickTheme('dark')} /> -->
       <div class="variouse__item" @click="handleClickLanguage('ru')">RU</div>
@@ -32,17 +32,17 @@ const handleClickLanguage = (lang: LanguageVarious) => {
   width: 100%;
   overflow-x: hidden;
 
-  * {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
 
   :first-child {
     min-width: 24px;
     min-height: 24px;
   }
+
+  color: var(--color-text-invert);
 }
 
-.variouse {
+.language-variouse {
   width: 100%;
 
   display: flex;

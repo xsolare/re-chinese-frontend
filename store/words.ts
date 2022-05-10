@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
-import { ApiStatus } from '../types'
-import { ICurrentWord, IWord, IWordSetting, WordsState } from 'types/store'
-import { useProgressTaskStore } from './progress-task'
+import { defineStore } from "pinia"
+import { ApiStatus } from "../types"
+import { ICurrentWord, IWord, IWordSetting, WordsState } from "types/store"
+import { useProgressTaskStore } from "./progress-task"
 
 //* =======================================================================================
 //* Words store
 //* =======================================================================================
 
-export const useWordsStore = defineStore('words', {
+export const useWordsStore = defineStore("words", {
   state: () =>
     ({
       loadStatus: ApiStatus.NONE,

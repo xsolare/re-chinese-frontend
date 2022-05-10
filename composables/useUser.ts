@@ -8,7 +8,7 @@ export default function useUser() {
     // ...
     const isValid = true
 
-    if (!isValid) router.push('/404')
+    if (!isValid) router.push("/404")
   })
 
   return { id }
