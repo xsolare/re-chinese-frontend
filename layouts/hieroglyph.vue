@@ -4,15 +4,17 @@
       <!-- <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_left">
          <NuxtLink to="/hieroglyph/add">
           <IconsMenu />
-        </NuxtLink> 
+        </NuxtLink>
       </div>-->
       <!-- <NuxtLink to="/hieroglyph/" class="hieroglyph-layout-menu__item">Коллекции</NuxtLink> -->
       <!-- <NuxtLink to="/hieroglyph/all" class="hieroglyph-layout-menu__item">All</NuxtLink> -->
-      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">{{ $t("hieroglyph.keys.title") }}</NuxtLink>
+      <NuxtLink to="/hieroglyph/keys" class="hieroglyph-layout-menu__item">
+        {{ $t("hieroglyph.keys.title") }}
+      </NuxtLink>
       <!-- <div class="hieroglyph-layout-menu__item hieroglyph-layout-menu__item_right">
          <NuxtLink to="/hieroglyph/add">
           <IconsAdd />
-        </NuxtLink> 
+        </NuxtLink>
       </div>-->
     </div>
     <IconsWave />
@@ -23,7 +25,7 @@
 </template>
 
 <script setup>
-const { $t } = useNuxtApp()
+const { $t } = useNuxtApp();
 </script>
 
 <style scoped lang="scss">

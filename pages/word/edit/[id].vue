@@ -1,17 +1,19 @@
 <template>
   <NuxtLayout name="word">
-    <form @submit.prevent="handleCheckForm" class="word-edit">
+    <form class="word-edit" @submit.prevent="handleCheckForm">
       <div class="word-edit-main">
         <div class="word-edit-content">
           <div class="word-edit-item">
             <div class="word-edit-title">
               <div v-if="!word.name.split('').length" class="word-edit-title__item">
-                <span class="word-edit-title__pinyin"></span>
-                <h2 class="word-edit-title__hieroglyph">?</h2>
+                <span class="word-edit-title__pinyin" />
+                <h2 class="word-edit-title__hieroglyph">
+                  ?
+                </h2>
               </div>
 
               <!-- Need rework -->
-              <div v-else v-for="(h, i) in word.name.split('')" :key="h" class="word-edit-title__item">
+              <div v-for="(h, i) in word.name.split('')" v-else :key="h" class="word-edit-title__item">
                 <span class="word-edit-title__pinyin"> {{ word.pinyin.split(" ")[i] }}</span>
                 <h2 class="word-edit-title__hieroglyph">
                   {{ h }}
@@ -20,7 +22,7 @@
             </div>
           </div>
           <div class="word-edit-item">
-            <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
+            <HieroglyphHsk :current-hsk="hsk" :callback="handleClickHsk" />
           </div>
           <div class="word-edit-item">
             <HieroglyphTranslate :word="word" />
@@ -32,31 +34,31 @@
 </template>
 
 <script lang="ts" setup>
-import { IRangeHsk, hskSlider, languagesSlider, IRangeLanguage } from "#/types"
-import { IWord } from "#/types/store"
-import { Ref } from "vue"
+import { Ref } from "vue";
+import { IRangeHsk, hskSlider, languagesSlider, IRangeLanguage } from "#/types";
+import { IWord } from "#/types/store";
 
 //                                                                      //
 
-const { $api } = useNuxtApp()
+const { $api } = useNuxtApp();
 
-const word = ref({} as IWord)
-const hsk: Ref<IRangeHsk> = ref(hskSlider[0])
+const word = ref({} as IWord);
+const hsk: Ref<IRangeHsk> = ref(hskSlider[0]);
 
 try {
   // +useRoute().params.id
-  word.value = await $api().word.getById(1)
-  hsk.value = hskSlider.find((x) => x.value === word.value.hsk)
+  word.value = await $api().word.getById(1);
+  hsk.value = hskSlider.find(x => x.value === word.value.hsk);
 } catch (error) {
-  useRouter().push("/404")
+  useRouter().push("/404");
 }
 
-const handleClickHsk = (value: IRangeHsk) => (hsk.value = value)
-const handleCheckForm = () => {}
+const handleClickHsk = (value: IRangeHsk) => (hsk.value = value);
+const handleCheckForm = () => {};
 
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

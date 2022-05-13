@@ -9,9 +9,10 @@
       <button
         v-for="tone in tones"
         :key="tone.name"
-        @click.prevent="callback(tone.id)"
         :class="{ isEnable: tone.id === currentTone }"
-        class="hsk-add-tone__item">
+        class="hsk-add-tone__item"
+        @click.prevent="callback(tone.id)"
+      >
         {{ tone.name }}
       </button>
     </div>
@@ -19,46 +20,46 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
+import { PropType } from "vue";
 
 const tones = reactive([
   {
     id: 1,
     name: "1",
-    isEnable: false,
+    isEnable: false
   },
   {
     id: 2,
     name: "2",
-    isEnable: false,
+    isEnable: false
   },
   {
     id: 3,
     name: "3",
-    isEnable: false,
+    isEnable: false
   },
   {
     id: 4,
     name: "4",
-    isEnable: false,
+    isEnable: false
   },
   {
     id: 5,
     name: "5",
-    isEnable: false,
-  },
-])
+    isEnable: false
+  }
+]);
 
 defineProps({
   currentTone: {
     type: Number,
-    required: true,
+    required: true
   },
   callback: {
     type: Function as PropType<(id: number) => void>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
-import { defineStore } from "pinia"
-import { ProgressTask } from "types/store"
+import { defineStore } from "pinia";
+import { ProgressTask } from "types/store";
 
 //* =======================================================================================
 //* Progress task store
@@ -10,7 +10,7 @@ export const useProgressTaskStore = defineStore("progressTask", {
     ({
       count: 0,
       statusTasks: [],
-      currentTaskId: null,
+      currentTaskId: null
     } as ProgressTask),
   getters: {
     // empty: (state) => {
@@ -18,17 +18,16 @@ export const useProgressTaskStore = defineStore("progressTask", {
     // },
   },
   actions: {
-    submitTask(id: number, isCorrect: boolean) {
-      const isExist = this.statusTasks.length === 0 ? false : this.statusTasks.find((x) => x.id === id) != undefined
+    submitTask (id: number, isCorrect: boolean) {
+      const isExist = this.statusTasks.length === 0 ? false : this.statusTasks.find(x => x.id === id) != undefined;
 
-      if (!isExist) this.statusTasks.push({ id, isCorrect })
-      else {
+      if (!isExist) { this.statusTasks.push({ id, isCorrect }); } else {
         this.statusTasks = this.statusTasks.map((x) => {
-          if (x.id === id) x.isCorrect = isCorrect
+          if (x.id === id) { x.isCorrect = isCorrect; }
 
-          return x
-        })
+          return x;
+        });
       }
-    },
-  },
-})
+    }
+  }
+});

@@ -1,16 +1,16 @@
 <template>
-  <div @click.stop ref="menuRef" class="menu-mobile">
+  <div ref="menuRef" class="menu-mobile" @click.stop>
     <header class="menu-mobile__header">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
         <path
-          d="m0 64 24 5.3C48 75 96 85 144 74.7 192 64 240 32 288 48c48 16 96 80 144 122.7C480 213 528 235 576 240s96-5 144-48S816 75 864 58.7c48-15.7 96 26.3 144 32 48 5.3 96-26.7 144-16 48 10.3 96 64.3 144 64 48 .3 96-53.7 120-80l24-26.7v288H0Z"></path>
+          d="m0 64 24 5.3C48 75 96 85 144 74.7 192 64 240 32 288 48c48 16 96 80 144 122.7C480 213 528 235 576 240s96-5 144-48S816 75 864 58.7c48-15.7 96 26.3 144 32 48 5.3 96-26.7 144-16 48 10.3 96 64.3 144 64 48 .3 96-53.7 120-80l24-26.7v288H0Z" />
       </svg>
     </header>
-    <div @click="handleClickClose" class="profile">
+    <div class="profile" @click="handleClickClose">
       <NuxtLink :to="'/'">
-        <img class="profile__dashboard" :src="'/duoluo_dalu.jpeg'" />
+        <img class="profile__dashboard" :src="'/assets/image/duoluo_dalu.jpeg'" />
         <div class="profile__image">
-          <img :src="userStore.userInfo?.avatar ? userStore.userInfo.avatar : '/duoluo_dalu.jpeg'" />
+          <img :src="userStore.userInfo?.avatar ? userStore.userInfo.avatar : '/assets/image/duoluo_dalu.jpeg'" />
           <span>{{ userStore.userInfo.username }}</span>
         </div>
       </NuxtLink>
@@ -18,21 +18,21 @@
     <div class="menu-mobile__content">
       <div class="menu-mobile__wrapper">
         <ul>
-          <li @click="handleClickClose" class="menu-mobile-item">
+          <li class="menu-mobile-item" @click="handleClickClose">
             <NuxtLink :to="'/'">
-              <img src="/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
+              <img src="/assets/image/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
               <span>None</span>
             </NuxtLink>
           </li>
-          <li @click="handleClickClose" class="menu-mobile-item">
+          <li class="menu-mobile-item" @click="handleClickClose">
             <NuxtLink :to="'/'">
-              <img src="/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
+              <img src="/assets/image/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
               <span>None</span>
             </NuxtLink>
           </li>
-          <li @click="handleClickClose" class="menu-mobile-item">
+          <li class="menu-mobile-item" @click="handleClickClose">
             <NuxtLink :to="'/'">
-              <img src="/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
+              <img src="/assets/image/duoluo_dalu.jpeg" alt="" class="menu-mobile-item__icon" />
               <span>None</span>
             </NuxtLink>
           </li>
@@ -46,7 +46,7 @@
               <IconsThemeBlue v-if="colorMode.preference === 'blue'" />
             </span>
             <UiModal :callback="() => useSystemStore().toggleThemeSelector(false)">
-              <div class="menu-mobile-modal" ref="modalRef" v-if="useSystemStore().isThemeSelector">
+              <div v-if="useSystemStore().isThemeSelector" ref="modalRef" class="menu-mobile-modal">
                 <div class="menu-mobile-modal__content">
                   <button class="menu-mobile-modal__item" @click="colorMode.preference = 'light'">L</button>
                   <button class="menu-mobile-modal__item" @click="colorMode.preference = 'dark'">D</button>
@@ -58,7 +58,7 @@
           <li class="menu-mobile-item">
             <span @click="useSystemStore().toggleLanguageSelector(true)">{{ $loc.toUpperCase() }}</span>
             <UiModal :callback="() => useSystemStore().toggleLanguageSelector(false)">
-              <div class="menu-mobile-modal" ref="modalRef" v-if="useSystemStore().isLanguageSelector">
+              <div v-if="useSystemStore().isLanguageSelector" ref="modalRef" class="menu-mobile-modal">
                 <div class="menu-mobile-modal__content">
                   <button class="menu-mobile-modal__item" @click="$cLoc('ru')">RU</button>
                   <button class="menu-mobile-modal__item" @click="$cLoc('en')">EN</button>
@@ -89,7 +89,9 @@ const colorMode = useColorMode()
 const handleClickClose = () => {}
 
 const signInTest = () => {
-  if (!userStore.isLoggedIn) return
+  if (!userStore.isLoggedIn) {
+    return
+  }
   $api()
     .user.signIn({
       username: "evai",

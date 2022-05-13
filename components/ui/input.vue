@@ -6,37 +6,38 @@
       :type="type"
       :class="{ error: error }"
       :value="input"
+      class="form-group__input"
       @input="$emit('update:input', $event.target?.value || '')"
-      class="form-group__input" />
+    >
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
+import { PropType } from "vue";
 
 const handleUpdate = () => {
-  console.log("afs")
-}
+  console.log("afs");
+};
 
 defineProps({
   input: {
     type: Object as PropType<any>,
-    required: false,
+    required: false
   },
   type: {
     type: String,
-    required: false,
+    required: false
   },
   name: {
     type: String,
-    required: false,
+    required: false
   },
   error: {
     type: Object as PropType<any>,
-    required: false,
-  },
-})
-defineEmits(["update:input"])
+    required: false
+  }
+});
+defineEmits(["update:input"]);
 </script>
 
 <style scoped lang="scss">

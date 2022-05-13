@@ -6,39 +6,40 @@
       :type="type"
       :class="{ error: error }"
       :value="input"
-      @input="$emit('update:input', $event.target?.value || '')"
       class="form-group__input"
-      maxlength="1" />
+      maxlength="1"
+      @input="$emit('update:input', $event.target?.value || '')"
+    >
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
-import { HieroglyphApi } from "../../utils/api/hieroglyph"
+import { PropType } from "vue";
+import { HieroglyphApi } from "../../utils/api/hieroglyph";
 
 const handleUpdate = () => {
-  console.log("afs")
-}
+  console.log("afs");
+};
 
 defineProps({
   input: {
     type: Object as PropType<any>,
-    required: false,
+    required: false
   },
   type: {
     type: String,
-    required: false,
+    required: false
   },
   name: {
     type: String,
-    required: false,
+    required: false
   },
   error: {
     type: Object as PropType<any>,
-    required: false,
-  },
-})
-defineEmits(["update:input"])
+    required: false
+  }
+});
+defineEmits(["update:input"]);
 </script>
 
 <style scoped lang="scss">

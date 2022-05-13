@@ -1,6 +1,6 @@
-import { AxiosInstance } from "axios"
-import { IUser } from "#types/store"
-import { IApiResponse } from "#/types/api"
+import { AxiosInstance } from "axios";
+import { IUser } from "#types/store";
+import { IApiResponse } from "#/types/api";
 
 interface IUserPayload {
   password: string
@@ -19,42 +19,42 @@ interface IApiUser extends IApiResponse {
 ///                                                                                 //
 
 export const UserApi = (instance: AxiosInstance) => ({
-  async auth(): Promise<IUserJwt> {
-    const { data } = await instance.put<IApiUser>("/user/auth", {})
+  async auth (): Promise<IUserJwt> {
+    const { data } = await instance.put<IApiUser>("/user/auth", {});
 
-    return data.data as IUserJwt
+    return data.data as IUserJwt;
   },
 
-  async signIn(payload: IUserPayload): Promise<IUserJwt> {
+  async signIn (payload: IUserPayload): Promise<IUserJwt> {
     const { data } = await instance.post<IApiUser>("/user/sign-in", {
       password: payload.password,
-      username: payload.username,
-    })
+      username: payload.username
+    });
 
-    return data.data as IUserJwt
+    return data.data as IUserJwt;
   },
 
-  async signUp(payload: IUserPayload): Promise<IUserJwt> {
+  async signUp (payload: IUserPayload): Promise<IUserJwt> {
     const { data } = await instance.post<IApiUser>("/user/sign-up", {
-      body: payload,
-    })
+      body: payload
+    });
 
-    return data.data as IUserJwt
+    return data.data as IUserJwt;
   },
 
-  async getOne(id: number): Promise<IUser> {
+  async getOne (id: number): Promise<IUser> {
     const { data } = await instance.get<IApiUser>("/user/", {
       params: {
-        id,
-      },
-    })
+        id
+      }
+    });
 
-    return data.data as IUser
+    return data.data as IUser;
   },
 
-  async getAll(): Promise<IUser[]> {
-    const { data } = await instance.get<IApiUser>("/user", {})
+  async getAll (): Promise<IUser[]> {
+    const { data } = await instance.get<IApiUser>("/user", {});
 
-    return data.data as IUser[]
-  },
-})
+    return data.data as IUser[];
+  }
+});

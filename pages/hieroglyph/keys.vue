@@ -1,20 +1,22 @@
 <template>
   <NuxtLayout name="hieroglyph">
-    <div class="hieroglyph-description" v-html="$t('hieroglyph.keys.description')"></div>
+    <div class="hieroglyph-description" v-html="$t('hieroglyph.keys.description')" />
     <div class="hieroglyph-keys-control">
       <div
-        @click="hieroglyphKeyStore.toggleShowPinyin()"
         class="hieroglyph-keys-control__item"
-        :class="{ isActive: hieroglyphKeyStore.isPinyinShowed }">
+        :class="{ isActive: hieroglyphKeyStore.isPinyinShowed }"
+        @click="hieroglyphKeyStore.toggleShowPinyin()"
+      >
         <button class="hieroglyph-keys-control__button">
           {{ hieroglyphKeyStore.isPinyinShowed ? $t("hieroglyph.keys.hidePinyin") : $t("hieroglyph.keys.showPinyin") }}
         </button>
         <IconsSelected class="hieroglyph-keys-control__selected" />
       </div>
       <div
-        @click="hieroglyphKeyStore.toggleShowHieroglyph()"
         class="hieroglyph-keys-control__item"
-        :class="{ isActive: hieroglyphKeyStore.isTranslateShowed }">
+        :class="{ isActive: hieroglyphKeyStore.isTranslateShowed }"
+        @click="hieroglyphKeyStore.toggleShowHieroglyph()"
+      >
         <button class="hieroglyph-keys-control__button">
           {{
             hieroglyphKeyStore.isTranslateShowed
@@ -32,20 +34,20 @@
 </template>
 
 <script setup>
-import { useHieroglyphKeyStore, usePinyinStore } from "#/store"
+import { useHieroglyphKeyStore, usePinyinStore } from "#/store";
 
 //                                                                      //
 
-const { $t } = useNuxtApp()
-const hieroglyphKeyStore = useHieroglyphKeyStore()
-const pinyinStore = usePinyinStore()
+const { $t } = useNuxtApp();
+const hieroglyphKeyStore = useHieroglyphKeyStore();
+const pinyinStore = usePinyinStore();
 
-await pinyinStore.init()
-await hieroglyphKeyStore.init()
+await pinyinStore.init();
+await hieroglyphKeyStore.init();
 
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

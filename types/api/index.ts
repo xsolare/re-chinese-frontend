@@ -1,5 +1,5 @@
-import { IHieroglyph } from "#/types/store/hieroglyph"
-import { IWord } from "../store"
+import { IWord } from "../store";
+import { IHieroglyph } from "#/types/store/hieroglyph";
 
 export interface IApiResponse {
   code: number

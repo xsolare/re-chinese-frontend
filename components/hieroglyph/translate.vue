@@ -1,6 +1,6 @@
 <template>
   <div class="translate-content">
-    <HieroglyphPartOfSpeech :currentPartOfSpeech="partOfSpeech" :callback="handlePartOfSpeech" />
+    <HieroglyphPartOfSpeech :current-part-of-speech="partOfSpeech" :callback="handlePartOfSpeech" />
 
     <div class="translate">
       <div class="translate__title">
@@ -13,9 +13,10 @@
       <div class="translate__list">
         <TransitionGroup name="item-transition">
           <div
-            class="translate__item"
             v-for="(translate, index) in translates.sort((a, b) => a.priority - b.priority)"
-            :key="translate.id">
+            :key="translate.id"
+            class="translate__item"
+          >
             <span>{{ index }}</span>
             <p>{{ translate.translate }}</p>
             <div class="priority">
@@ -28,18 +29,24 @@
 
         <div v-if="!isCreatingTranslate" class="translate__control control-content">
           <div class="control-content__button">
-            <button @click.prevent="isCreatingTranslate = true" class="control-content__add">Add</button>
+            <button class="control-content__add" @click.prevent="isCreatingTranslate = true">
+              Add
+            </button>
           </div>
         </div>
 
         <div v-else class="translate__control control-content">
           <div class="control-content__item">
             <textarea placeholder="translate" />
-            <input placeholder="1 - 100" maxlength="3" />
+            <input placeholder="1 - 100" maxlength="3">
           </div>
           <div class="control-content__button">
-            <button @click.prevent="handleClickSend" class="control-content__send">Send</button>
-            <button @click.prevent="isCreatingTranslate = false" class="control-content__cancel">Cancel</button>
+            <button class="control-content__send" @click.prevent="handleClickSend">
+              Send
+            </button>
+            <button class="control-content__cancel" @click.prevent="isCreatingTranslate = false">
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -48,39 +55,39 @@
 </template>
 
 <script lang="ts" setup>
-import { IRangeLanguage, languagesSlider } from "#/types"
-import { IWord, IWordTranslate } from "#/types/store"
-import { PropType, Ref } from "vue"
+import { PropType, Ref } from "vue";
+import { IRangeLanguage, languagesSlider } from "#/types";
+import { IWord, IWordTranslate } from "#/types/store";
 
 //                                                                      //
 
-const { $api } = useNuxtApp()
+const { $api } = useNuxtApp();
 
-const isCreatingTranslate: Ref<Boolean> = ref(false)
-const partOfSpeech: Ref<number> = ref(1)
-const language: Ref<IRangeLanguage> = ref(languagesSlider[0])
-const translates: Ref<IWordTranslate[]> = ref([])
+const isCreatingTranslate: Ref<boolean> = ref(false);
+const partOfSpeech: Ref<number> = ref(1);
+const language: Ref<IRangeLanguage> = ref(languagesSlider[0]);
+const translates: Ref<IWordTranslate[]> = ref([]);
 
-const handleClickLanguage = (value: IRangeLanguage) => (language.value = value)
-const handlePartOfSpeech = (id: number) => (partOfSpeech.value = id)
+const handleClickLanguage = (value: IRangeLanguage) => (language.value = value);
+const handlePartOfSpeech = (id: number) => (partOfSpeech.value = id);
 const handleClickSend = async () => {
   // const newTranslate = await $api().word.addTranslate()
-}
+};
 
 watchEffect(async () => {
-  partOfSpeech.value
-  language.value
+  partOfSpeech.value;
+  language.value;
 
-  translates.value = []
-  translates.value = await $api().word.getTranslateById(props.word.id, language.value.id, partOfSpeech.value)
-})
+  translates.value = [];
+  translates.value = await $api().word.getTranslateById(props.word.id, language.value.id, partOfSpeech.value);
+});
 
 const props = defineProps({
   word: {
     type: Object as PropType<IWord>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

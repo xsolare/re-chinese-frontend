@@ -2,11 +2,11 @@
   <WordsTypesQa v-if="wordsStore.currentWord.typeQuestion === 0" />
   <WordsTypesTrZh v-if="wordsStore.currentWord.typeQuestion === 1" />
   <WordsTypesZhTr v-if="wordsStore.currentWord.typeQuestion === 2" />
-  <WordsTypesZhTr v-if="wordsStore.currentWord.typeQuestion === 3" />
+  <!-- <WordsTypesZhTr v-if="wordsStore.currentWord.typeQuestion === 3" /> -->
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore } from "../../store"
+import { useWordsStore } from "#/store"
 
 const wordsStore = useWordsStore()
 </script>

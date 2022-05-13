@@ -1,6 +1,6 @@
 <template>
   <div>¯\_(ツ)_/¯</div>
-  <slot></slot>
+  <slot />
 </template>
 
 <script></script>

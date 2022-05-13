@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore, useProgressTaskStore } from "../../store"
+import { useWordsStore, useProgressTaskStore } from "../../store";
 
-const wordsStore = useWordsStore()
-const progressTaskStore = useProgressTaskStore()
+const wordsStore = useWordsStore();
+const progressTaskStore = useProgressTaskStore();
 
 definePageMeta({
-  layout: "task",
-})
+  layout: "task"
+});
 </script>
 
 <style lang="scss" scoped>

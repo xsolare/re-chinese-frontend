@@ -4,14 +4,16 @@
       <div class="header-content__progress progress-content">
         <div class="progress-content__bar">
           <span
-            class="progress-content__item"
-            :key="task.id"
             v-for="task in progressTaskStore.statusTasks"
-            :class="{ true: task.isCorrect, false: !task.isCorrect }" />
-          <span
+            :key="task.id"
             class="progress-content__item"
+            :class="{ true: task.isCorrect, false: !task.isCorrect }"
+          />
+          <span
+            v-for="empty in progressTaskStore.count - progressTaskStore.statusTasks.length"
             :key="empty"
-            v-for="empty in progressTaskStore.count - progressTaskStore.statusTasks.length" />
+            class="progress-content__item"
+          />
         </div>
         <div class="progress-content__complete">
           <span>{{ wordsStore.countCompleted }}</span>
@@ -19,10 +21,10 @@
           <span>{{ wordsStore.words.length }}</span>
         </div>
       </div>
-      <button @click="handleClickClose" class="header-content__button header-content__button_left">
+      <button class="header-content__button header-content__button_left" @click="handleClickClose">
         <IconsClose />
       </button>
-      <button @click="handleClickPinyin" class="header-content__button header-content__button_right">
+      <button class="header-content__button header-content__button_right" @click="handleClickPinyin">
         <IconsTranslate />
       </button>
     </div>
@@ -34,19 +36,19 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore, useProgressTaskStore } from "../store"
+import { useWordsStore, useProgressTaskStore } from "../store";
 
-const wordsStore = useWordsStore()
-const progressTaskStore = useProgressTaskStore()
+const wordsStore = useWordsStore();
+const progressTaskStore = useProgressTaskStore();
 
-const router = useRouter()
+const router = useRouter();
 
 // console.log('a', progressTaskStore.empty)
 
-const handleClickClose = () => router.push("/")
+const handleClickClose = () => router.push("/");
 
 // TODO global pinyin
-const handleClickPinyin = () => wordsStore.$patch({ isPinyi: !wordsStore.isPinyi })
+const handleClickPinyin = () => wordsStore.$patch({ isPinyi: !wordsStore.isPinyi });
 </script>
 
 <style scoped lang="scss">

@@ -11,19 +11,19 @@
 </template>
 
 <script lang="ts" setup>
-import { IRange, hskSlider } from "#/types"
-import { PropType } from "vue"
+import { PropType } from "vue";
+import { IRange, hskSlider } from "#/types";
 
 defineProps({
   currentHsk: {
     type: Object as PropType<IRange>,
-    required: true,
+    required: true
   },
   callback: {
     type: Function as PropType<(value: IRange) => void>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
-import { ApiStatus } from ".."
-import { IHieroglyph } from "./hieroglyph"
+import { ApiStatus } from "..";
+import { IHieroglyph } from "./hieroglyph";
 
 //* State
 export interface HieroglyphKeyState {

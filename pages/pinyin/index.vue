@@ -1,14 +1,14 @@
 <template>
   <div class="pinyin">
-    <div class="pinyin-description" v-html="$t('pinyin.description')"></div>
+    <div class="pinyin-description" v-html="$t('pinyin.description')" />
     <PinyinTable />
   </div>
 </template>
 
 <script setup>
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

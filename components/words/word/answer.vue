@@ -1,54 +1,62 @@
 <template>
-  <div @click="handleClickSelect" v-if="mode === 'zh'" class="word-answer" :class="{ selected }">
+  <div v-if="mode === 'zh'" class="word-answer" :class="{ selected }" @click="handleClickSelect">
     <div class="word-answer__pinyin">
       <!-- <span v-show="isPinyi">{{ word.pinyin }}</span> -->
-      <p v-show="isPinyi">{{ word.pinyin }}</p>
+      <p v-show="isPinyi">
+        {{ word.pinyin }}
+      </p>
     </div>
     <span class="word-answer__text">{{ word.hieroglyphic }}</span>
     <div class="word-answer__tr">
-      <p v-if="isAnswered">{{ word.translate }}</p>
+      <p v-if="isAnswered">
+        {{ word.translate }}
+      </p>
     </div>
   </div>
 
-  <div @click="handleClickSelect" v-else class="word-answer" :class="{ selected }">
+  <div v-else class="word-answer" :class="{ selected }" @click="handleClickSelect">
     <div class="word-answer__pinyin">
-      <p v-show="isAnswered">{{ word.pinyin }}</p>
+      <p v-show="isAnswered">
+        {{ word.pinyin }}
+      </p>
     </div>
     <span class="word-answer__text">{{ word.translate }}</span>
     <div class="word-answer__tr">
-      <p v-if="isAnswered">{{ word.hieroglyphic }}</p>
+      <p v-if="isAnswered">
+        {{ word.hieroglyphic }}
+      </p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
-import { IWord } from "../../../types/store/words"
+import { PropType } from "vue";
+import { IWord } from "../../../types/store/words";
 
-const selected = ref(false)
+const selected = ref(false);
 
 const handleClickSelect = () => {
-  selected.value = !selected.value
-}
+  selected.value = !selected.value;
+};
 
 defineProps({
   word: {
     type: Object as PropType<IWord>,
-    required: true,
+    required: true
   },
   isPinyi: {
     type: Boolean,
-    required: true,
+    required: true
   },
   isAnswered: {
     type: Boolean,
-    required: true,
+    required: true
   },
   mode: {
     type: String as PropType<"zh" | "tr">,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

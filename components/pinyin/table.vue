@@ -3,27 +3,29 @@
     <div class="pinyin-container">
       <div :style="{ gridRow: 1 }" class="pinyin-row__empty" />
 
-      <template :key="final.id" v-for="final in pinyinStore.finals">
+      <template v-for="final in pinyinStore.finals" :key="final.id">
         <div :style="{ gridRow: 1 }" class="pinyin-row__h" :class="{ highlight: hoverPinyin.finalPos === final.pos }">
           {{ final.name }}
         </div>
       </template>
 
-      <template :key="initial.id" v-for="initial in pinyinStore.initials">
+      <template v-for="initial in pinyinStore.initials" :key="initial.id">
         <div
           :style="{ gridRow: initial.pos + 1 }"
           class="pinyin-row__v"
-          :class="{ highlight: hoverPinyin.initialPos === initial.pos }">
+          :class="{ highlight: hoverPinyin.initialPos === initial.pos }"
+        >
           {{ initial.name }}
         </div>
-        <template :key="pinyin.id" v-for="pinyin in cullPinyin(initial.pos)">
+        <template v-for="pinyin in cullPinyin(initial.pos)" :key="pinyin.id">
           <div
             v-if="pinyin?.id"
+            :style="{ gridRow: initial.pos + 1 }"
+            class="pinyin-row"
             @mouseover="handleOverPinyin(pinyin)"
             @mouseleave="handleLeavePinyin(pinyin)"
             @click.stop="handleClickPinyin(pinyin)"
-            :style="{ gridRow: initial.pos + 1 }"
-            class="pinyin-row">
+          >
             {{ pinyin.pinyin }}
           </div>
           <div v-else :style="{ gridRow: initial.pos + 1 }" class="pinyin-row__empty" />
@@ -31,7 +33,7 @@
       </template>
     </div>
     <UiModal :callback="() => (isShowed = false)">
-      <div class="pinyin-menu" v-if="isShowed">
+      <div v-if="isShowed" class="pinyin-menu">
         <div class="pinyin-menu__content">
           <div class="pinyin-menu-header">
             <span>{{ pinyinStore.initials.find((x) => x.id === selectedPinyin.initialId).name }}</span>
@@ -44,8 +46,9 @@
                 (x) => x.finalId === selectedPinyin.finalId && x.initialId === selectedPinyin.initialId,
               )"
               :key="pinyinTone.id"
+              class="pinyin-menu-tones__button"
               @click.stop="handleClickTonePinyin(pinyinTone)"
-              class="pinyin-menu-tones__button">
+            >
               {{ pinyinTone.pinyin }}
             </button>
           </div>
@@ -56,64 +59,64 @@
 </template>
 
 <script lang="ts" setup>
-import { usePinyinStore } from "#/store"
-import { IPinyin } from "#/types"
-import { debounce } from "#/utils"
-import { PropType, ref } from "vue"
+import { PropType, ref } from "vue";
+import { usePinyinStore } from "#/store";
+import { IPinyin } from "#/types";
+import { debounce } from "#/utils";
 
-const pinyinStore = usePinyinStore()
+const pinyinStore = usePinyinStore();
 
-await pinyinStore.init()
+await pinyinStore.init();
 
-const hoverPinyin = ref({} as IPinyin)
-const selectedPinyin = ref({} as IPinyin)
-const isShowed = ref(false)
+const hoverPinyin = ref({} as IPinyin);
+const selectedPinyin = ref({} as IPinyin);
+const isShowed = ref(false);
 
 const resetHoverPinyin = (pinyin: IPinyin) => {
-  if (pinyin.id === hoverPinyin.value.id) hoverPinyin.value = {} as IPinyin
-}
-const handleLeavePinyin = debounce(resetHoverPinyin, 100)
-const handleOverPinyin = (pinyin: IPinyin) => (hoverPinyin.value = pinyin)
+  if (pinyin.id === hoverPinyin.value.id) { hoverPinyin.value = {} as IPinyin; }
+};
+const handleLeavePinyin = debounce(resetHoverPinyin, 100);
+const handleOverPinyin = (pinyin: IPinyin) => (hoverPinyin.value = pinyin);
 const handleClickPinyin = (pinyin: IPinyin) => {
-  selectedPinyin.value = pinyin
-  isShowed.value = true
-}
+  selectedPinyin.value = pinyin;
+  isShowed.value = true;
+};
 const handleClickTonePinyin = (pinyin: IPinyin) => {
-  isShowed.value = false
-  if (props?.callback) props.callback(pinyin)
-}
+  isShowed.value = false;
+  if (props?.callback) { props.callback(pinyin); }
+};
 
 const cullPinyin = (initialPos: number): IPinyin[] => {
-  const cull = pinyinStore.pinyin.filter((x, key) => x.initialPos === initialPos && +x.tone === 5)
+  const cull = pinyinStore.pinyin.filter((x, key) => x.initialPos === initialPos && +x.tone === 5);
 
-  cull.sort((x, y) => x.finalPos - y.finalPos)
+  cull.sort((x, y) => x.finalPos - y.finalPos);
 
-  const sector: IPinyin[] = []
+  const sector: IPinyin[] = [];
 
   pinyinStore.finals.forEach((x) => {
-    const isExist = cull.find((y) => y.finalPos == x.pos)
+    const isExist = cull.find(y => y.finalPos == x.pos);
 
-    isExist ? sector.push(isExist) : sector.push({} as IPinyin)
-  })
+    isExist ? sector.push(isExist) : sector.push({} as IPinyin);
+  });
 
-  return sector
-}
+  return sector;
+};
 
 useRouter().beforeEach((to, from) => {
   if (isShowed.value) {
-    isShowed.value = false
-    return false
+    isShowed.value = false;
+    return false;
   }
 
-  return true
-})
+  return true;
+});
 
 const props = defineProps({
   callback: {
     type: Function as PropType<(pinyin: IPinyin) => void>,
-    required: false,
-  },
-})
+    required: false
+  }
+});
 </script>
 
 <style lang="scss" scoped>

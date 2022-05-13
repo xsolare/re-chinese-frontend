@@ -6,11 +6,12 @@
     </div>
     <div class="part-of-speech__list">
       <button
-        class="part-of-speech__item"
         v-for="part in partOfSpeech"
-        @click.prevent="callback(part.id)"
+        :key="part.id"
+        class="part-of-speech__item"
         :class="{ isActive: part.id === currentPartOfSpeech }"
-        :key="part.id">
+        @click.prevent="callback(part.id)"
+      >
         {{ part.name }}
         <IconsSelected class="part-of-speech__selected" />
       </button>
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
+import { PropType } from "vue";
 
 const partOfSpeech = ref([
   { id: 1, name: "существительное" },
@@ -33,19 +34,19 @@ const partOfSpeech = ref([
   { id: 6, name: "числительное" },
   { id: 7, name: "предлог" },
   { id: 8, name: "союз" },
-  { id: 9, name: "частица" },
-])
+  { id: 9, name: "частица" }
+]);
 
 defineProps({
   currentPartOfSpeech: {
     type: Number,
-    required: true,
+    required: true
   },
   callback: {
     type: Function as PropType<(id: number) => void>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

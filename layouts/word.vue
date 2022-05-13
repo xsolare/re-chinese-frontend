@@ -2,10 +2,16 @@
   <div>
     <div class="word-layout-menu">
       <div class="word-layout-menu__item word-layout-menu__item_left">
-        <NuxtLink to="/word/add">xD</NuxtLink>
+        <NuxtLink to="/word/add">
+          xD
+        </NuxtLink>
       </div>
-      <NuxtLink to="/word/" class="word-layout-menu__item">Ad</NuxtLink>
-      <NuxtLink to="/word/all" class="word-layout-menu__item">Dobavit'</NuxtLink>
+      <NuxtLink to="/word/" class="word-layout-menu__item">
+        Ad
+      </NuxtLink>
+      <NuxtLink to="/word/all" class="word-layout-menu__item">
+        Dobavit'
+      </NuxtLink>
       <div class="word-layout-menu__item word-layout-menu__item_right">
         <NuxtLink to="/word/add">
           <IconsAdd />

@@ -8,21 +8,27 @@
               <IconsDashboard />
               <span>{{ $t("header.pinyin") }}</span>
             </NuxtLink>
-            <NuxtLink to="/pinyin" class="header-nav__item">{{ $t("header.pinyin") }}</NuxtLink>
+            <NuxtLink to="/pinyin" class="header-nav__item">
+              {{ $t("header.pinyin") }}
+            </NuxtLink>
           </li>
           <li>
             <NuxtLink to="/hieroglyph/keys" class="header-nav__item mobile">
               <IconsDashboard />
               <span>{{ $t("header.hieroglyph") }}</span>
             </NuxtLink>
-            <NuxtLink to="/hieroglyph/keys" class="header-nav__item">{{ $t("header.hieroglyph") }}</NuxtLink>
+            <NuxtLink to="/hieroglyph/keys" class="header-nav__item">
+              {{ $t("header.hieroglyph") }}
+            </NuxtLink>
           </li>
           <li>
             <NuxtLink to="/word" class="header-nav__item mobile">
               <IconsDashboard />
               <span>{{ $t("header.word") }}</span>
             </NuxtLink>
-            <NuxtLink to="/word" class="header-nav__item">{{ $t("header.word") }}</NuxtLink>
+            <NuxtLink to="/word" class="header-nav__item">
+              {{ $t("header.word") }}
+            </NuxtLink>
           </li>
 
           <li>
@@ -31,12 +37,12 @@
                 <NuxtLink :to="'/'">
                   <img
                     class="menu-profile__avatar"
-                    :src="userStore.userInfo?.avatar ? userStore.userInfo.avatar : '/duoluo_dalu.jpeg'"
+                    :src="userStore.userInfo?.avatar ? userStore.userInfo.avatar : '/assets/image/duoluo_dalu.jpeg'"
                     alt="-"
                     width="32"
                     height="32" />
                 </NuxtLink>
-                <div @click="systemStore.toggleMenu(!systemStore.isMenuOpen)" class="menu-profile__chevron">
+                <div class="menu-profile__chevron" @click="systemStore.toggleMenu(!systemStore.isMenuOpen)">
                   <IconsChevron />
                 </div>
               </div>
@@ -62,8 +68,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useSystemStore } from "#/store"
 import { useUserStore } from "../../store/user"
+import { useSystemStore } from "#/store"
 
 const env = useRuntimeConfig()
 const { $api, $t, $cLoc } = useNuxtApp()

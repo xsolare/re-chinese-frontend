@@ -21,27 +21,27 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
-import { IWord } from "../../../types/store/words"
+import { PropType } from "vue";
+import { IWord } from "../../../types/store/words";
 
 defineProps({
   word: {
     type: Object as PropType<IWord>,
-    required: true,
+    required: true
   },
   isPinyi: {
     type: Boolean,
-    required: true,
+    required: true
   },
   isAnswered: {
     type: Boolean,
-    required: true,
+    required: true
   },
   mode: {
     type: String as PropType<"zh" | "tr">,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

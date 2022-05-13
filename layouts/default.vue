@@ -16,20 +16,20 @@
 </template>
 
 <script setup lang="ts">
-const { $t } = useNuxtApp()
+const { $t } = useNuxtApp();
 
-const currentRoute = computed(() => useRouter().currentRoute.value)
-const routeName = computed(() => currentRoute.value.name)
-const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ""))
+const currentRoute = computed(() => useRouter().currentRoute.value);
+const routeName = computed(() => currentRoute.value.name);
+const canonicalUrl = computed(() => currentRoute.value.path.replace(/\/$/, ""));
 
 useMeta({
   meta: [
     { property: "og:title", content: "$t('meta.title')" },
     { property: "og:description", content: "$t('about.content')" },
     { property: "og:image", content: "/banner.jpg" },
-    { property: "og:type", content: "profile" },
-  ],
-})
+    { property: "og:type", content: "profile" }
+  ]
+});
 </script>
 
 <style scoped lang="scss"></style>

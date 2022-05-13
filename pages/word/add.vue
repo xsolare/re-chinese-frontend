@@ -1,16 +1,16 @@
 <template>
   <NuxtLayout name="word">
-    <form @submit.prevent="handleCheckForm" class="word-add">
+    <form class="word-add" @submit.prevent="handleCheckForm">
       <div class="word-add-main">
         <div class="word-add-content">
           <div class="word-add-item">
             <div class="word-add-title">
               <div v-if="!hieroglyphicAccepted.length" class="word-add-title__item">
-                <span class="word-add-title__pinyin"></span>
+                <span class="word-add-title__pinyin" />
                 <h2 class="word-add-title__hieroglyph">?</h2>
               </div>
 
-              <div v-else v-for="ha in hieroglyphicAccepted" :key="ha.id" class="word-add-title__item">
+              <div v-for="ha in hieroglyphicAccepted" v-else :key="ha.id" class="word-add-title__item">
                 <span class="word-add-title__pinyin">
                   {{ pinyinStore.pinyin.find((x) => x.id === ha.pinyinId).pinyin }}</span
                 >
@@ -21,10 +21,10 @@
             </div>
           </div>
           <div class="word-add-item">
-            <UiInput v-model:input.trim="hieroglyphic">Hieroglyphic</UiInput>
+            <UiInput v-model:input.trim="hieroglyphic"> Hieroglyphic </UiInput>
           </div>
           <div class="word-add-item">
-            <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
+            <HieroglyphHsk :current-hsk="hsk" :callback="handleClickHsk" />
           </div>
           <div class="word-add-item">
             <div class="word-add-item__errors">
@@ -46,11 +46,11 @@
 </template>
 
 <script lang="ts" setup>
+import { Ref } from "vue"
 import { usePinyinStore } from "#/store"
 import { ApiStatus, hskSlider, IRangeHsk } from "#/types"
 import { IHieroglyph } from "#/types/store"
 import { debounce, matchChineseHieroglyph } from "#/utils"
-import { Ref } from "vue"
 const { $api } = useNuxtApp()
 
 const pinyinStore = usePinyinStore()
@@ -65,13 +65,12 @@ const hsk: Ref<IRangeHsk> = ref(hskSlider[0])
 
 const handleClickHsk = (value: IRangeHsk) => (hsk.value = value)
 const handleChangeValue = debounce((str: string) => {
-  console.log("handleChangeValue")
-
   hieroglyphicErrors.value = []
   hieroglyphicAccepted.value = []
 
-  if (!matchChineseHieroglyph(str)) hieroglyphicErrors.value.push("Not chinese hieroglyph")
-  else {
+  if (!matchChineseHieroglyph(str)) {
+    hieroglyphicErrors.value.push("Not chinese hieroglyph")
+  } else {
     const hieroglyphParts = str.split("")
     hieroglyphParts.forEach((hieroglyph) => {
       $api()

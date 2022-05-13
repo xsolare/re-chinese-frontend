@@ -5,19 +5,21 @@
         :word="wordsStore.currentWord.word"
         :is-pinyi="wordsStore.isPinyi"
         :is-answered="wordsStore.isAnswered"
-        :mode="'zh'" />
+        :mode="'zh'"
+      />
     </div>
     <div class="zh-tr__control control-content">
       <div class="control-content__item">
-        <template :key="arr" v-for="arr in [...new Array(31)]">
+        <template v-for="arr in [...new Array(31)]" :key="arr">
           <WordsWordAnswer
             :word="wordsStore.currentWord.word"
             :is-pinyi="wordsStore.isPinyi"
             :is-answered="wordsStore.isAnswered"
-            :mode="'tr'" />
+            :mode="'tr'"
+          />
         </template>
       </div>
-      <button @click="() => wordsStore.$patch({ isAnswered: !wordsStore.isAnswered })" class="control-content__show">
+      <button class="control-content__show" @click="() => wordsStore.$patch({ isAnswered: !wordsStore.isAnswered })">
         Проверить
       </button>
     </div>
@@ -25,9 +27,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useWordsStore } from "../../../store"
+import { useWordsStore } from "../../../store";
 
-const wordsStore = useWordsStore()
+const wordsStore = useWordsStore();
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import { ApiStatus } from ".."
+import { ApiStatus } from "..";
 
 //* State
 export interface HieroglyphState {

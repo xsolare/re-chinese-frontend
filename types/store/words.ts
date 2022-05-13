@@ -1,5 +1,5 @@
-import { ApiStatus } from ".."
-import { IHieroglyph } from "./hieroglyph"
+import { ApiStatus } from "..";
+import { IHieroglyph } from "./hieroglyph";
 
 //* State
 export interface WordsState {
@@ -51,5 +51,5 @@ export interface ISubmitedWord {
   correct: boolean
 }
 
-export const typesQuestion = [0, 1, 2] as const
+export const typesQuestion = [0, 1, 2] as const;
 export type TypesQuestion = typeof typesQuestion[number]

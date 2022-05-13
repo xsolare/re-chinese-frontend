@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
     <label class="form-group__label">Pinyin</label>
-    <button @click="handleClickPinyin" class="form-group__select">
+    <button class="form-group__select" @click="handleClickPinyin">
       {{ value?.pinyin ? value.pinyin : "Select" }}
     </button>
   </div>
@@ -11,36 +11,36 @@
 </template>
 
 <script lang="ts" setup>
-import { IPinyin } from "#/types"
-import { PropType, Ref } from "vue"
+import { PropType, Ref } from "vue";
+import { IPinyin } from "#/types";
 
-const isShowed: Ref<boolean> = ref(false)
-const handleClickPinyin = () => (isShowed.value = true)
+const isShowed: Ref<boolean> = ref(false);
+const handleClickPinyin = () => (isShowed.value = true);
 
 watchEffect(() => {
-  props.value
-  isShowed.value = false
-})
+  props.value;
+  isShowed.value = false;
+});
 
 useRouter().beforeEach((to, from) => {
   if (isShowed.value) {
-    isShowed.value = false
-    return false
+    isShowed.value = false;
+    return false;
   }
 
-  return true
-})
+  return true;
+});
 
 const props = defineProps({
   value: {
     type: Object as PropType<IPinyin>,
-    required: true,
+    required: true
   },
   callback: {
     type: Function as PropType<(pinyin: IPinyin) => void>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style scoped lang="scss">

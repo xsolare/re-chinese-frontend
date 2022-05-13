@@ -1,26 +1,38 @@
 <template>
   <div class="qa">
     <div class="qa__task">
-      <div class="qa__item" :class="{ active: selectedWord?.id == 1 }">1</div>
-      <div class="qa__item">2</div>
-      <div class="qa__item">3</div>
-      <div class="qa__item">4</div>
-      <div class="qa__item">5</div>
-      <div class="qa__item">6</div>
+      <div class="qa__item" :class="{ active: selectedWord?.id == 1 }">
+        1
+      </div>
+      <div class="qa__item">
+        2
+      </div>
+      <div class="qa__item">
+        3
+      </div>
+      <div class="qa__item">
+        4
+      </div>
+      <div class="qa__item">
+        5
+      </div>
+      <div class="qa__item">
+        6
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { IWord } from "#/types/store"
-import { Ref } from "vue"
-import { useWordsStore } from "../../../store"
+import { Ref } from "vue";
+import { useWordsStore } from "../../../store";
+import { IWord } from "#/types/store";
 
-const selectedWord: Ref<IWord | null> = ref(null)
+const selectedWord: Ref<IWord | null> = ref(null);
 
-const handleClick = (word: IWord) => {}
+const handleClick = (word: IWord) => {};
 
-const wordsStore = useWordsStore()
+const wordsStore = useWordsStore();
 </script>
 
 <style lang="scss" scoped>

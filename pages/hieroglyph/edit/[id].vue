@@ -1,18 +1,20 @@
 <template>
   <NuxtLayout name="hieroglyph">
-    <form @submit.prevent="handleCheckForm" class="hieroglyph-edit">
+    <form class="hieroglyph-edit" @submit.prevent="handleCheckForm">
       <div class="hieroglyph-edit-main">
         <div class="hieroglyph-edit-content">
           <div class="hieroglyph-edit-item">
             <div class="hieroglyph-edit-title">
               <div class="hieroglyph-edit-title__content">
                 <span class="hieroglyph-edit-title__pinyin">shi</span>
-                <h2 class="hieroglyph-edit-title__hieroglyph">取</h2>
+                <h2 class="hieroglyph-edit-title__hieroglyph">
+                  取
+                </h2>
               </div>
             </div>
           </div>
           <div class="hieroglyph-edit-item">
-            <HieroglyphHsk :currentHsk="currentHsk" :callback="handleClickHsk" />
+            <HieroglyphHsk :current-hsk="currentHsk" :callback="handleClickHsk" />
           </div>
         </div>
       </div>
@@ -21,21 +23,21 @@
 </template>
 
 <script lang="ts" setup>
-import { IRangeHsk, hskSlider } from "#/types"
-import { Ref } from "vue"
+import { Ref } from "vue";
+import { IRangeHsk, hskSlider } from "#/types";
 
 //                                                                      //
 
-const currentHsk: Ref<IRangeHsk> = ref(hskSlider[0])
-const currentPartOfSpeech = ref(1)
+const currentHsk: Ref<IRangeHsk> = ref(hskSlider[0]);
+const currentPartOfSpeech = ref(1);
 
-const handleClickHsk = (hsk: IRangeHsk) => (currentHsk.value = hsk)
-const handlePartOfSpeech = (id: number) => (currentPartOfSpeech.value = id)
-const handleCheckForm = () => {}
+const handleClickHsk = (hsk: IRangeHsk) => (currentHsk.value = hsk);
+const handlePartOfSpeech = (id: number) => (currentPartOfSpeech.value = id);
+const handleCheckForm = () => {};
 
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

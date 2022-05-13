@@ -1,16 +1,18 @@
 <template>
   <NuxtLayout name="hieroglyph">
-    <form @submit.prevent="handleCheckForm" class="hieroglyph-add">
+    <form class="hieroglyph-add" @submit.prevent="handleCheckForm">
       <div class="hieroglyph-add-main">
         <div class="hieroglyph-add-content">
           <div class="hieroglyph-add-item">
-            <div @click.capture.prevent class="hieroglyph-add-fields">
-              <UiInputHieroglyph v-model:input.trim="hieroglyph">Hieroglyph</UiInputHieroglyph>
+            <div class="hieroglyph-add-fields" @click.capture.prevent>
+              <UiInputHieroglyph v-model:input.trim="hieroglyph">
+                Hieroglyph
+              </UiInputHieroglyph>
               <UiSelectPinyin :value="pinyin" :callback="handleClickPinyin" />
             </div>
           </div>
           <div class="hieroglyph-add-item">
-            <HieroglyphHsk :currentHsk="hsk" :callback="handleClickHsk" />
+            <HieroglyphHsk :current-hsk="hsk" :callback="handleClickHsk" />
           </div>
           <div class="hieroglyph-add-item">
             <div class="hieroglyph-add-item__errors">
@@ -31,50 +33,50 @@
 </template>
 
 <script lang="ts" setup>
-import { IRangeHsk, hskSlider, IPinyin } from "#/types"
-import { matchChineseHieroglyph } from "#utils"
-import { Ref } from "vue"
+import { Ref } from "vue";
+import { IRangeHsk, hskSlider, IPinyin } from "#/types";
+import { matchChineseHieroglyph } from "#utils";
 
 //                                                                      //
-const { $api } = useNuxtApp()
+const { $api } = useNuxtApp();
 
-const pinyin: Ref<IPinyin | null> = ref(null)
-const hieroglyph: Ref<string> = ref("")
-const hsk: Ref<IRangeHsk> = ref(hskSlider[0])
+const pinyin: Ref<IPinyin | null> = ref(null);
+const hieroglyph: Ref<string> = ref("");
+const hsk: Ref<IRangeHsk> = ref(hskSlider[0]);
 
-const pinyinErrors: Ref<string[]> = ref([])
-const hieroglyphErrors: Ref<string[]> = ref([])
+const pinyinErrors: Ref<string[]> = ref([]);
+const hieroglyphErrors: Ref<string[]> = ref([]);
 
-const handleClickPinyin = (value: IPinyin) => (pinyin.value = value)
-const handleClickHsk = (value: IRangeHsk) => (hsk.value = value)
+const handleClickPinyin = (value: IPinyin) => (pinyin.value = value);
+const handleClickHsk = (value: IRangeHsk) => (hsk.value = value);
 const handleCheckForm = async () => {
-  pinyinErrors.value = []
-  hieroglyphErrors.value = []
-  let isErrors = 0
+  pinyinErrors.value = [];
+  hieroglyphErrors.value = [];
+  let isErrors = 0;
 
-  console.log("p - ", pinyin.value?.id, "h - ", hieroglyph.value)
+  console.log("p - ", pinyin.value?.id, "h - ", hieroglyph.value);
 
   if (hieroglyph.value === "") {
-    //& in real not needed
-    hieroglyphErrors.value.push("Hieroglyph field empty")
-    isErrors += 1
+    // & in real not needed
+    hieroglyphErrors.value.push("Hieroglyph field empty");
+    isErrors += 1;
   } else if (!matchChineseHieroglyph(hieroglyph.value)) {
-    //& in real not needed
-    hieroglyphErrors.value.push("Not chinese hieroglyph")
-    isErrors += 1
+    // & in real not needed
+    hieroglyphErrors.value.push("Not chinese hieroglyph");
+    isErrors += 1;
   } else {
-    const isExist = await $api().hieroglyph.getByHieroglyph(hieroglyph.value)
+    const isExist = await $api().hieroglyph.getByHieroglyph(hieroglyph.value);
 
     if (isExist.length > 0) {
-      hieroglyphErrors.value.push("Hieroglyph is exist")
-      isErrors += 1
+      hieroglyphErrors.value.push("Hieroglyph is exist");
+      isErrors += 1;
     }
   }
 
-  //& in real not needed
+  // & in real not needed
   if (pinyin.value === null) {
-    pinyinErrors.value.push("Pinyin field empty")
-    isErrors += 1
+    pinyinErrors.value.push("Pinyin field empty");
+    isErrors += 1;
   }
 
   if (!isErrors) {
@@ -82,23 +84,23 @@ const handleCheckForm = async () => {
       const newHieroglyph = await $api().hieroglyph.add({
         hieroglyph: hieroglyph.value,
         pinyinId: pinyin.value.id,
-        hsk: +hsk.value.value,
-      })
-      console.log("newHieroglyph", newHieroglyph)
+        hsk: +hsk.value.value
+      });
+      console.log("newHieroglyph", newHieroglyph);
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
     }
   }
-}
+};
 
 watchEffect(() => {
-  hieroglyph.value
-  hieroglyphErrors.value = []
-})
+  hieroglyph.value;
+  hieroglyphErrors.value = [];
+});
 
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

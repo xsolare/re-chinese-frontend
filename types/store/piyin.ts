@@ -1,4 +1,4 @@
-import { ApiStatus } from ".."
+import { ApiStatus } from "..";
 
 //* State
 export interface PinyinState {
@@ -28,5 +28,5 @@ export interface IFI {
   name: string
   pos: number
 }
-export interface IFinal extends IFI {}
-export interface IInitial extends IFI {}
+export type IFinal = IFI
+export type IInitial = IFI

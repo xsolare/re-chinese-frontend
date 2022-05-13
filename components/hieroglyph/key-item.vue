@@ -1,21 +1,25 @@
 <template>
   <div class="hieroglyph-keys-wrapper">
-    <div @click="isFullyShowed = !isFullyShowed" class="hieroglyph-keys-item">
+    <div class="hieroglyph-keys-item" @click="isFullyShowed = !isFullyShowed">
       <TransitionGroup name="item-transition">
-        <div :key="hieroglyph.id + '1'" class="hieroglyph-keys-item__index">{{ hieroglyph.index }}</div>
+        <div :key="hieroglyph.id + '1'" class="hieroglyph-keys-item__index">
+          {{ hieroglyph.index }}
+        </div>
         <div
-          :key="hieroglyph.id + '2'"
           v-if="hieroglyphKeyStore.isPinyinShowed || isFullyShowed"
-          class="hieroglyph-keys-item__pinyin">
+          :key="hieroglyph.id + '2'"
+          class="hieroglyph-keys-item__pinyin"
+        >
           {{ pinyinStore.pinyin.find((x) => x.id === hieroglyph.hieroglyph.pinyinId).pinyin }}
         </div>
         <div :key="hieroglyph.id + '3'" class="hieroglyph-keys-item__hieroglyph">
           {{ hieroglyph.hieroglyph.hieroglyph }}
         </div>
         <div
-          :key="hieroglyph.id + '4'"
           v-if="hieroglyphKeyStore.isTranslateShowed || isFullyShowed"
-          class="hieroglyph-keys-item__translate">
+          :key="hieroglyph.id + '4'"
+          class="hieroglyph-keys-item__translate"
+        >
           {{ hieroglyph.translate[0].translate }}
         </div>
       </TransitionGroup>
@@ -24,33 +28,33 @@
 </template>
 
 <script lang="ts" setup>
-import { useHieroglyphKeyStore, usePinyinStore } from "#/store"
-import { IHieroglyphKey } from "#/types/store"
-import { Ref, PropType } from "vue"
+import { Ref, PropType } from "vue";
+import { useHieroglyphKeyStore, usePinyinStore } from "#/store";
+import { IHieroglyphKey } from "#/types/store";
 
 //                                                                      //
 
-const pinyinStore = usePinyinStore()
-const hieroglyphKeyStore = useHieroglyphKeyStore()
+const pinyinStore = usePinyinStore();
+const hieroglyphKeyStore = useHieroglyphKeyStore();
 
-const isFullyShowed: Ref<boolean> = ref(false)
+const isFullyShowed: Ref<boolean> = ref(false);
 
 watchEffect(() => {
-  hieroglyphKeyStore.isTranslateShowed
-  hieroglyphKeyStore.isPinyinShowed
-  isFullyShowed.value = false
-})
+  hieroglyphKeyStore.isTranslateShowed;
+  hieroglyphKeyStore.isPinyinShowed;
+  isFullyShowed.value = false;
+});
 
 defineProps({
   hieroglyph: {
     type: Object as PropType<IHieroglyphKey>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

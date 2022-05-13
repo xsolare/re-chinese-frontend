@@ -1,7 +1,7 @@
 <template>
   <div class="range-value">
     <ul class="range-value__list">
-      <li v-for="r in range" @click="callback(r)" class="range-value__item" :key="r.index">
+      <li v-for="r in range" :key="r.index" class="range-value__item" @click="callback(r)">
         {{ r.value }}
       </li>
       <div
@@ -9,31 +9,32 @@
         :style="{
           left: item?.getBoundingClientRect().width * current.index + 'px',
           width: 100 / range.length + '%',
-        }" />
+        }"
+      />
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { IRange } from "#/types"
-import { ref, PropType } from "vue"
+import { ref, PropType } from "vue";
+import { IRange } from "#/types";
 
-const item = ref(null)
+const item = ref(null);
 
 defineProps({
   range: {
     type: Array as PropType<IRange[]>,
-    required: true,
+    required: true
   },
   current: {
     type: Object as PropType<IRange>,
-    required: true,
+    required: true
   },
   callback: {
     type: Function as PropType<(value: IRange) => void>,
-    required: true,
-  },
-})
+    required: true
+  }
+});
 </script>
 
 <style lang="scss" scoped>

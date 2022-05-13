@@ -1,25 +1,31 @@
 <template>
-  <div @click="active = !active" class="language">
+  <div class="language" @click="active = !active">
     <!-- {currentThemeIcon} -->
-    <div class="language__title">{{ $t("header.menu.language") }}</div>
+    <div class="language__title">
+      {{ $t("header.menu.language") }}
+    </div>
     <div class="language-variouse" :class="{ active: active }">
       <!-- <GiSun onClick={handleClickTheme('light')} /> <IoMdRainy onClick={handleClickTheme('blue')} /> <GiNightSleep
       onClick={handleClickTheme('dark')} /> -->
-      <div class="variouse__item" @click="handleClickLanguage('ru')">RU</div>
-      <div class="variouse__item" @click="handleClickLanguage('en')">EN</div>
+      <div class="variouse__item" @click="handleClickLanguage('ru')">
+        RU
+      </div>
+      <div class="variouse__item" @click="handleClickLanguage('en')">
+        EN
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { LanguageVarious } from "#/types"
+import { LanguageVarious } from "#/types";
 
-const { $t, $cLoc } = useNuxtApp()
-const active = ref(false)
+const { $t, $cLoc } = useNuxtApp();
+const active = ref(false);
 
 const handleClickLanguage = (lang: LanguageVarious) => {
-  $cLoc(lang)
-}
+  $cLoc(lang);
+};
 </script>
 
 <style lang="scss" scoped>

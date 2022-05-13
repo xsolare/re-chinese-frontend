@@ -1,15 +1,15 @@
-import { useUserStore } from "#/store"
-import { IUser } from "#/types/store"
-import { api } from "#/utils/api"
+import { useUserStore } from "#/store";
+import { IUser } from "#/types/store";
+import { api } from "#/utils/api";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const env = useRuntimeConfig()
+  const env = useRuntimeConfig();
 
   try {
-    const { user, jwt } = await api().user.auth()
+    const { user, jwt } = await api().user.auth();
 
-    useUserStore().setUserSettings(user)
-    useCookie(env.JWT_HEADER).value = jwt
+    useUserStore().setUserSettings(user);
+    useCookie(env.JWT_HEADER).value = jwt;
 
     //* Not needed...
     return {
@@ -17,10 +17,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         auth: {
           isLoggedIn: true,
           user,
-          jwt,
-        },
-      },
-    }
+          jwt
+        }
+      }
+    };
   } catch (err) {
     // console.log("err")
   }
@@ -31,8 +31,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       auth: {
         isLoggedIn: false,
         user: {} as IUser,
-        jwt: "",
-      },
-    },
-  }
-})
+        jwt: ""
+      }
+    }
+  };
+});

@@ -6,8 +6,8 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

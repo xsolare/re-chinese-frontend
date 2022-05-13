@@ -1,21 +1,29 @@
 <template>
-  <div @click="active = !active" class="theme">
-    <div class="theme__title">{{ $t("header.menu.theme") }}</div>
+  <div class="theme" @click="active = !active">
+    <div class="theme__title">
+      {{ $t("header.menu.theme") }}
+    </div>
     <div class="theme-variouse" :class="{ active: active }">
-      <div class="variouse__item" @click="colorMode.preference = 'light'">L</div>
-      <div class="variouse__item" @click="colorMode.preference = 'dark'">D</div>
-      <div class="variouse__item" @click="colorMode.preference = 'blue'">B</div>
+      <div class="variouse__item" @click="colorMode.preference = 'light'">
+        L
+      </div>
+      <div class="variouse__item" @click="colorMode.preference = 'dark'">
+        D
+      </div>
+      <div class="variouse__item" @click="colorMode.preference = 'blue'">
+        B
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useSystemStore } from "#/store/system"
-import { ThemeVarious } from "#/types"
+import { useSystemStore } from "#/store/system";
+import { ThemeVarious } from "#/types";
 
-const { $t } = useNuxtApp()
-const active = ref(false)
-const colorMode = useColorMode()
+const { $t } = useNuxtApp();
+const active = ref(false);
+const colorMode = useColorMode();
 </script>
 
 <style lang="scss" scoped>

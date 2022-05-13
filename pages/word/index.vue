@@ -2,26 +2,32 @@
   <NuxtLayout name="word">
     <div class="words">
       <div class="words-content">
-        <h1 class="words-content__header">Коллекции</h1>
+        <h1 class="words-content__header">
+          Коллекции
+        </h1>
         <div class="collection-list">
           <div v-for="arr in [...new Array(7)]" :key="arr" class="collection-list__item collection-item">
             <div class="collection-item__inner">
               <img
                 class="collection-item__img"
-                src="https://sun9-76.userapi.com/impf/p3gfrXdjYDnJgwpGkeItyQ7vfPXttVry46x73g/CPMeiskPK_U.jpg?size=1024x768&quality=96&sign=f88be99f56b4c49a10142965a4d25ba8&type=album" />
+                src="https://sun9-76.userapi.com/impf/p3gfrXdjYDnJgwpGkeItyQ7vfPXttVry46x73g/CPMeiskPK_U.jpg?size=1024x768&quality=96&sign=f88be99f56b4c49a10142965a4d25ba8&type=album"
+              >
               <span class="collection-item__name">nice</span>
             </div>
           </div>
         </div>
       </div>
       <div class="words-content">
-        <h1 class="words-content__header">Мои коллекции</h1>
+        <h1 class="words-content__header">
+          Мои коллекции
+        </h1>
         <div class="collection-list">
           <div v-for="arr in [...new Array(3)]" :key="arr" class="collection-list__item collection-item">
             <div class="collection-item__inner">
               <img
                 class="collection-item__img"
-                src="https://sun9-76.userapi.com/impf/p3gfrXdjYDnJgwpGkeItyQ7vfPXttVry46x73g/CPMeiskPK_U.jpg?size=1024x768&quality=96&sign=f88be99f56b4c49a10142965a4d25ba8&type=album" />
+                src="https://sun9-76.userapi.com/impf/p3gfrXdjYDnJgwpGkeItyQ7vfPXttVry46x73g/CPMeiskPK_U.jpg?size=1024x768&quality=96&sign=f88be99f56b4c49a10142965a4d25ba8&type=album"
+              >
               <span class="collection-item__name">nice</span>
             </div>
           </div>
@@ -29,12 +35,12 @@
       </div>
       <div class="words-control">
         <div class="words-control__selected selected-inner">
-          <span class="selected-inner__none"
-            >В связи с тем, что не выбрано ни одной категории, слова будут подбираться случайным образом</span
-          >
+          <span class="selected-inner__none">В связи с тем, что не выбрано ни одной категории, слова будут подбираться случайным образом</span>
         </div>
         <div class="words-control__mode mode-inner">
-          <h1 class="mode-inner__header">Режимы</h1>
+          <h1 class="mode-inner__header">
+            Режимы
+          </h1>
           <ul class="mode-inner__list">
             <li class="mode-inner__item">
               <button class="mode-inner__button">
@@ -60,7 +66,9 @@
           </ul>
         </div>
         <div class="words-start">
-          <NuxtLink to="/words/1" class="words-start__button">Начать</NuxtLink>
+          <NuxtLink to="/words/1" class="words-start__button">
+            Начать
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -69,8 +77,8 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: "app",
-})
+  layout: "app"
+});
 </script>
 
 <style lang="scss" scoped>

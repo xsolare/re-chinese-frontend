@@ -6,7 +6,8 @@
       stroke="white"
       stroke-width="1.96"
       stroke-linecap="round"
-      stroke-linejoin="round" />
+      stroke-linejoin="round"
+    />
   </svg>
 </template>
 
